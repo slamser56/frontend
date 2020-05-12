@@ -1,27 +1,20 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import axios from 'axios';
 
 export default class App extends Component {
-  state = {status: 'false'};
+  state = {status: false};
 
-  componentWillMount = async () => {
-    try {
-      
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  componentDidMount() {
+    axios
+      .post('http://192.168.100.3:5000/api')
+      .then((res) => {
+        this.setState({status: res.data.status});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -32,7 +25,7 @@ export default class App extends Component {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text>Hello, {this.state.status}</Text>
+          {this.state.status && <Text>Hello</Text>}
         </View>
       </>
     );
