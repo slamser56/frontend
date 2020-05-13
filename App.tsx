@@ -1,33 +1,23 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Main, Entry, inputCode } from './src/index';
+import { Provider } from 'react-redux';
+//import { PersistGate } from 'redux-persist/integration/react';
+import { store } from './src/store';
 
-export default class App extends Component {
-  state = {status: false};
+const Stack = createStackNavigator();
 
-  componentDidMount() {
-    axios
-      .post('http://192.168.100.3:5000/api')
-      .then((res) => {
-        this.setState({status: res.data.status});
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  render() {
-    return (
-      <>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          {this.state.status && <Text>Hello</Text>}
-        </View>
-      </>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Main} />
+          <Stack.Screen name="Entry" component={Entry} />
+          <Stack.Screen name="inputCode" component={inputCode} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
 }
