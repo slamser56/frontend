@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { PhoneState } from '../types';
 import { Container, Text, Button } from '../style/main';
+import { ListAppState } from '../types';
 
 export default function Main() {
   const navigation = useNavigation();
   const [status, setStatus] = useState(false);
 
-  const isAutorized = useSelector(
-    (state: PhoneState) => state.phone.isAutorized,
-  );
-  const phone = useSelector((state: PhoneState) => state.phone.phone);
+  const phone = useSelector((state: ListAppState) => state.phone);
 
   useEffect(() => {
     axios
@@ -28,13 +25,15 @@ export default function Main() {
   return (
     <Container>
       {status && <Text>Connected to api</Text>}
-      {!isAutorized && (
+      {(!phone.isAutorized || !status) && (
         <Button
           title="Go to Registration"
           onPress={() => navigation.navigate('Entry')}
         />
       )}
-      {isAutorized && <Text>You logged in, your phone {phone}</Text>}
+      {phone.isAutorized && (
+        <Text>You logged in, your phone {phone.phone}</Text>
+      )}
     </Container>
   );
 }

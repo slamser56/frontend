@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { PhoneState } from '../types';
 import { verifyCode } from '../action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Container, Title, Input, Button } from '../style/inputCode';
+import { ListAppState } from '../types';
 
 export default function Entry() {
   const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
 
-  const isAutorized = useSelector(
-    (state: PhoneState) => state.phone.isAutorized,
-  );
-  const phone = useSelector((state: PhoneState) => state.phone.phone);
+  const phone = useSelector((state: ListAppState) => state.phone);
+  phone.statusSendCode = false;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAutorized) {
+    if (phone.isAutorized) {
       navigation.navigate('Home');
     }
   });
@@ -33,7 +32,7 @@ export default function Entry() {
       />
       <Button
         onPress={() => {
-          dispatch(verifyCode(number, phone));
+          dispatch(verifyCode(number, phone.phone));
         }}
         title="OK"
       />

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { PhoneState } from '../types';
 import { thunkSendCode } from '../action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Container, Title, Input, Button } from '../style/entry';
+import { ListAppState } from '../types';
 
 export default function Entry() {
   const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
 
-  const statusSendCode = useSelector(
-    (state: PhoneState) => state.phone.statusSendCode,
+  let statusSendCode = useSelector(
+    (state: ListAppState) => state.phone.statusSendCode,
   );
   const dispatch = useDispatch();
 
