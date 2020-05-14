@@ -10,6 +10,7 @@ export const verifyCode = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
 ) => {
+  phoneNumber.replace('+', '');
   const result = await axios.post(
     'http://192.168.100.3:5000/api/phone/CodeVerify',
     { phoneNumber, code },
@@ -28,6 +29,7 @@ export const thunkSendCode = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async (
   dispatch,
 ) => {
+  phoneNumber.replace('+', '');
   const result = await axios.post(
     'http://192.168.100.3:5000/api/phone/sendCode',
     { phoneNumber },

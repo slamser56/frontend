@@ -9,13 +9,11 @@ export default function Entry() {
   const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
 
-  let statusSendCode = useSelector(
-    (state: ListAppState) => state.phone.statusSendCode,
-  );
+  const phone = useSelector((state: ListAppState) => state.phone);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (statusSendCode) {
+    if (phone.statusSendCode) {
       navigation.navigate('inputCode');
     }
   });

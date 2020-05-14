@@ -7,11 +7,13 @@ import { ListAppState } from '../types';
 
 export default function Main() {
   const navigation = useNavigation();
-  const [status, setStatus] = useState(false);
-
   const phone = useSelector((state: ListAppState) => state.phone);
 
+  const [status, setStatus] = useState(false);
+  const [isAutorized, setIsAutorized] = useState(phone.isAutorized);
+
   useEffect(() => {
+    setIsAutorized(phone.isAutorized);
     axios
       .post('http://192.168.100.3:5000/api')
       .then((res) => {
@@ -25,14 +27,24 @@ export default function Main() {
   return (
     <Container>
       {status && <Text>Connected to api</Text>}
-      {(!phone.isAutorized || !status) && (
+      {!status && <Text>Don't connected to api</Text>}
+      {!isAutorized && status && (
         <Button
           title="Go to Registration"
           onPress={() => navigation.navigate('Entry')}
         />
       )}
-      {phone.isAutorized && (
-        <Text>You logged in, your phone {phone.phone}</Text>
+      {isAutorized && (
+        <>
+          <Button
+            title="Logout"
+            onPress={() => {
+              phone.isAutorized = false;
+              setIsAutorized(false);
+            }}
+          />
+          <Text>You logged in, your phone {phone.phone}</Text>
+        </>
       )}
     </Container>
   );

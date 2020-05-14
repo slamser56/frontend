@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 const persistConfig = {
   key: 'phone',
   storage: AsyncStorage,
-  whitelist: ['phone'],
+  whitelist: ['phone', 'isAutorized'],
 };
 
 const rootReducer = combineReducers<ListAppState>({
