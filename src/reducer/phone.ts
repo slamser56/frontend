@@ -1,23 +1,31 @@
-import { PhoneState, PhoneActionTypes, Constants } from '../types';
+import { PhoneState, PhoneActionTypes, ConstantsPhone } from '../types';
 
-const initialState: PhoneState = {
-  phone: '',
-  isAutorized: false,
-  statusSendCode: false,
-  status: true,
+const initialStatePhone: PhoneState = {
+  phoneNumber: '',
+  token: '',
 };
 
 export function phoneReducer(
-  state = initialState,
+  state = initialStatePhone,
   action: PhoneActionTypes,
 ): PhoneState {
   switch (action.type) {
-    case Constants.SEND_CODE:
+    case ConstantsPhone.SEND_CODE:
       return {
         ...state,
         ...action.payload,
       };
-    case Constants.VERIFY_CODE:
+    case ConstantsPhone.VERIFY_CODE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case ConstantsPhone.LOG_OUT:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case ConstantsPhone.CHECK_TOKEN:
       return {
         ...state,
         ...action.payload,

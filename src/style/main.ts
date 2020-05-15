@@ -9,12 +9,22 @@ export const Container = styled.View({
 
 export const Text = styled.Text({
   color: '#000',
-  fontSize: '30px',
   textAlign: 'center',
-  marginBottom: '30px',
+  marginBottom: 30,
+  fontSize: 30,
 });
 
-export const Button = styled.Button({
+export const Button = styled.TouchableOpacity({
   color: '#f194ff',
-  backgroundColor: '#000',
+  width: 200,
+  height: 50,
+  backgroundColor: '#C2C2C2',
+  borderRadius: 15,
+  justifyContent: 'center',
+});
+
+export const TextButton = styled.Text({
+  color: '#000',
+  textAlign: 'center',
+  fontSize: 20,
 });

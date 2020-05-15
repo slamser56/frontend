@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Text, Button } from '../style/main';
+import { Container, Text, Button, TextButton } from '../style/main';
 import { ListAppState } from '../types';
+import { checkConnect, logOut, checkToken } from '../action';
+import { StackNavigationRoutes } from '../page';
 
 export default function Main() {
   const navigation = useNavigation();
-  const phone = useSelector((state: ListAppState) => state.phone);
+  const dispatch = useDispatch();
 
-  const [status, setStatus] = useState(false);
-  const [isAutorized, setIsAutorized] = useState(phone.isAutorized);
+  const { phone, system } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    setIsAutorized(phone.isAutorized);
-    axios
-      .post('http://192.168.100.3:5000/api')
-      .then((res) => {
-        setStatus(res.data.status);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    dispatch(checkConnect());
+    dispatch(checkToken(phone.token));
+  }, []);
+
+  function handleClick() {
+    navigation.navigate(StackNavigationRoutes.ENTRY);
+  }
+  function handleLogOut() {
+    dispatch(logOut());
+  }
 
   return (
     <Container>
-      {status && <Text>Connected to api</Text>}
-      {!status && <Text>Don't connected to api</Text>}
-      {!isAutorized && status && (
-        <Button
-          title="Go to Registration"
-          onPress={() => navigation.navigate('Entry')}
-        />
-      )}
-      {isAutorized && (
+      {system.connected ? (
         <>
-          <Button
-            title="Logout"
-            onPress={() => {
-              phone.isAutorized = false;
-              setIsAutorized(false);
-            }}
-          />
-          <Text>You logged in, your phone {phone.phone}</Text>
+          <Text>Connected to api</Text>
+          {phone.token ? (
+            <>
+              <Text>Your phone number: {phone.phoneNumber}</Text>
+              <Button onPress={handleLogOut}>
+                <Text>Log out</Text>
+              </Button>
+            </>
+          ) : (
+            <Button onPress={handleClick}>
+              <TextButton>Go to Registration</TextButton>
+            </Button>
+          )}
         </>
+      ) : (
+        <Text>Don't connected to api</Text>
       )}
     </Container>
   );

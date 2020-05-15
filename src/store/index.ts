@@ -1,5 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import { phoneReducer } from '../reducer';
+import { phoneReducer, systemReducer } from '../reducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { ListAppState } from '../types';
@@ -7,13 +7,13 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const persistConfig = {
-  key: 'phone',
+  key: 'root',
   storage: AsyncStorage,
-  whitelist: ['phone', 'isAutorized'],
 };
 
 const rootReducer = combineReducers<ListAppState>({
   phone: phoneReducer,
+  system: systemReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

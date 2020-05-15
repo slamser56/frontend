@@ -4,21 +4,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Container, Title, Input, Button } from '../style/inputCode';
 import { ListAppState } from '../types';
+import { StackNavigationRoutes } from '../page';
+import { TextColored } from '../style/style';
 
 export default function Entry() {
-  const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
-
-  const phone = useSelector((state: ListAppState) => state.phone);
-  phone.statusSendCode = false;
-
   const dispatch = useDispatch();
+  const phone = useSelector((state: ListAppState) => state.phone);
+
+  const [number, onChangeNumber] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    if (phone.isAutorized) {
-      navigation.navigate('Home');
+    if (status) {
+      setMessage('');
+      setStatus(false);
+      navigation.navigate(StackNavigationRoutes.HOME);
     }
-  });
+  }, [navigation, status]);
+
+  async function handleClick() {
+    let res: any = await dispatch(verifyCode(number, phone.phoneNumber));
+    res.status ? setStatus(true) : setMessage(res);
+  }
 
   return (
     <Container>
@@ -30,12 +39,12 @@ export default function Entry() {
         }}
         value={number}
       />
-      <Button
-        onPress={() => {
-          dispatch(verifyCode(number, phone.phone));
-        }}
-        title="OK"
-      />
+      <Button onPress={handleClick} title="OK" />
+      {message ? (
+        <TextColored size="20px" color="red">
+          {message}
+        </TextColored>
+      ) : null}
     </Container>
   );
 }

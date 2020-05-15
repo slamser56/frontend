@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { thunkSendCode } from '../action';
-import { useSelector, useDispatch } from 'react-redux';
+import { sendCode } from '../action';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Container, Title, Input, Button } from '../style/entry';
-import { ListAppState } from '../types';
+import { TextColored } from '../style/style';
+import { StackNavigationRoutes } from '../page';
 
 export default function Entry() {
-  const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
-
-  const phone = useSelector((state: ListAppState) => state.phone);
   const dispatch = useDispatch();
 
+  const [number, setNumber] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState(false);
+
   useEffect(() => {
-    if (phone.statusSendCode) {
-      navigation.navigate('inputCode');
+    if (status) {
+      setMessage('');
+      setStatus(false);
+      navigation.navigate(StackNavigationRoutes.INPUT_CODE);
     }
-  });
+  }, [navigation, status]);
+
+  async function handleClick() {
+    let res: any = await dispatch(sendCode(number));
+    res.status ? setStatus(true) : setMessage(res);
+  }
 
   return (
     <Container>
@@ -24,16 +33,16 @@ export default function Entry() {
       <Input
         placeholder="Entry phone number"
         onChangeText={(text) => {
-          onChangeNumber(text);
+          setNumber(text);
         }}
         value={number}
       />
-      <Button
-        onPress={() => {
-          dispatch(thunkSendCode(number));
-        }}
-        title="Register"
-      />
+      <Button onPress={handleClick} title="Register" />
+      {message ? (
+        <TextColored size="20px" color="red">
+          {message}
+        </TextColored>
+      ) : null}
     </Container>
   );
 }
