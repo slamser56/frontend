@@ -21,6 +21,9 @@ export default function Main() {
   function handleClick() {
     navigation.navigate(StackNavigationRoutes.ENTRY);
   }
+  function handleClickProfile() {
+    navigation.navigate(StackNavigationRoutes.PROFILE);
+  }
   function handleLogOut() {
     dispatch(logOut());
   }
@@ -37,6 +40,9 @@ export default function Main() {
               <Text>Your phone number: {phone.phoneNumber}</Text>
               <Button onPress={handleLogOut}>
                 <Text fontSize="20px">Log out</Text>
+              </Button>
+              <Button style={{ marginTop: 10 }} onPress={handleClickProfile}>
+                <Text fontSize="20px">Profile</Text>
               </Button>
             </>
           ) : (

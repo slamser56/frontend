@@ -13,16 +13,16 @@ export function phoneReducer(
     case ConstantsPhone.SEND_CODE_OK:
     case ConstantsPhone.VERIFY_CODE_OK:
     case ConstantsPhone.VERIFY_TOKEN_OK:
+    case ConstantsPhone.VERIFY_CODE_BAD:
       return {
         ...state,
         ...action.payload,
       };
     case ConstantsPhone.LOG_OUT:
     case ConstantsPhone.SEND_CODE_BAD:
-    case ConstantsPhone.VERIFY_CODE_BAD:
     case ConstantsPhone.VERIFY_TOKEN_BAD:
       return initialStatePhone;
     default:
-      return state; //!!!!!
+      return state;
   }
 }

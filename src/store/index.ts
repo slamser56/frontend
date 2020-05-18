@@ -1,5 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import { phoneReducer, systemReducer } from '../reducer';
+import { phoneReducer, systemReducer, profileReducer } from '../reducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { ListAppState } from '../types';
@@ -14,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers<ListAppState>({
   phone: phoneReducer,
   system: systemReducer,
+  profile: profileReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
