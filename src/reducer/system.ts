@@ -9,11 +9,13 @@ export function systemReducer(
   action: SystemActionTypes,
 ): SystemState {
   switch (action.type) {
-    case ConstantsSystem.CHECK_CONNECT:
+    case ConstantsSystem.SUCCESS_CONNECT:
       return {
         ...state,
         ...action.payload,
       };
+    case ConstantsSystem.FAIL_CONNECT:
+      return initialStateSystem;
     default:
       return { ...state };
   }

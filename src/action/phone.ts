@@ -1,8 +1,8 @@
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../store';
-import { ConstantsPhone, PhoneActionTypes } from '../types';
-import { instance } from '../axios';
+import { ConstantsPhone } from '../types';
+import { api } from '../axios';
 type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 
 export const verifyCode = (
@@ -10,79 +10,63 @@ export const verifyCode = (
   phoneNumber: string,
 ): AppThunk => async (dispatch) => {
   try {
-    if (isNaN(Number(code))) {
-      return 'Input correct code';
-    }
-    const result: any = await instance.post('/phone/codeVerify', {
+    const { token } = await api.post('/phone/codeVerify', {
       phoneNumber,
       code,
     });
     dispatch({
-      type: ConstantsPhone.VERIFY_CODE,
+      type: ConstantsPhone.VERIFY_CODE_OK,
       payload: {
-        token: result.token,
+        token,
       },
     });
-    return { status: true };
+    return Promise.resolve();
   } catch (err) {
-    console.log(err);
-    let status: any = err.response.status;
-    if (status === 404) {
-      return 'Input correct code';
+    dispatch({
+      type: ConstantsPhone.VERIFY_CODE_BAD,
+    });
+    if (err.response.status === 404) {
+      return Promise.reject('Input correct code');
     }
-    return 'Something wrong';
+    return Promise.reject('Something wrong');
   }
 };
 
 export const sendCode = (phoneNumber: string): AppThunk => async (dispatch) => {
   try {
-    if (phoneNumber === '') {
-      return 'Empty line';
-    } else if (phoneNumber.length < 12 || phoneNumber.length > 13) {
-      return 'Incorrect number';
-    } else if (isNaN(Number(phoneNumber))) {
-      return 'Incorrect number';
-    }
-    await instance.post('/phone/sendCode', { phoneNumber });
+    await api.post('/phone/sendCode', { phoneNumber });
     dispatch({
-      type: ConstantsPhone.SEND_CODE,
+      type: ConstantsPhone.SEND_CODE_OK,
       payload: {
         phoneNumber,
       },
     });
-    return { status: true };
+    return Promise.resolve();
   } catch (err) {
-    console.log(err);
-    return 'Something wrong';
+    dispatch({
+      type: ConstantsPhone.SEND_CODE_BAD,
+    });
+    return Promise.reject('Something wrong');
   }
 };
 
 export const checkToken = (token: string): AppThunk => async (dispatch) => {
   try {
-    await instance.post('/phone/verifyToken', { token });
+    await api.post('/phone/verifyToken', { token });
     dispatch({
-      type: ConstantsPhone.CHECK_TOKEN,
-      payload: {
-        token,
-      },
+      type: ConstantsPhone.VERIFY_TOKEN_OK,
     });
     return true;
   } catch (err) {
-    console.log(err);
     dispatch({
-      type: ConstantsPhone.CHECK_TOKEN,
-      payload: {
-        token: '',
-        phoneNumber: '',
-      },
+      type: ConstantsPhone.VERIFY_TOKEN_BAD,
     });
     return false;
   }
 };
 
-export function logOut(): PhoneActionTypes {
+export function logOut() {
   return {
     type: ConstantsPhone.LOG_OUT,
-    payload: { token: '', phoneNumber: '' },
   };
 }

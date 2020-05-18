@@ -4,34 +4,25 @@ export interface PhoneState {
 }
 
 export enum ConstantsPhone {
-  SEND_CODE = 'SEND_CODE',
-  VERIFY_CODE = 'VERIFY_CODE',
+  SEND_CODE_OK = 'SEND_CODE_OK',
+  SEND_CODE_BAD = 'SEND_CODE_BAD',
+  VERIFY_CODE_OK = 'VERIFY_CODE_OK',
+  VERIFY_CODE_BAD = 'VERIFY_CODE_BAD',
   LOG_OUT = 'LOG_OUT',
-  CHECK_TOKEN = 'CHECK_TOKEN',
+  VERIFY_TOKEN_OK = 'VERIFY_TOKEN_OK',
+  VERIFY_TOKEN_BAD = 'VERIFY_TOKEN_BAD',
 }
 
-interface SendCodeAction {
-  type: typeof ConstantsPhone.SEND_CODE;
+interface PhoneAction {
+  type:
+    | ConstantsPhone.LOG_OUT
+    | ConstantsPhone.SEND_CODE_BAD
+    | ConstantsPhone.SEND_CODE_OK
+    | ConstantsPhone.VERIFY_CODE_BAD
+    | ConstantsPhone.VERIFY_CODE_OK
+    | ConstantsPhone.VERIFY_TOKEN_BAD
+    | ConstantsPhone.VERIFY_TOKEN_OK;
   payload: PhoneState;
 }
 
-interface VerifyCodeAction {
-  type: typeof ConstantsPhone.VERIFY_CODE;
-  payload: PhoneState;
-}
-
-interface LogOutAction {
-  type: typeof ConstantsPhone.LOG_OUT;
-  payload: PhoneState;
-}
-
-interface CheckToken {
-  type: typeof ConstantsPhone.CHECK_TOKEN;
-  payload: PhoneState;
-}
-
-export type PhoneActionTypes =
-  | SendCodeAction
-  | VerifyCodeAction
-  | LogOutAction
-  | CheckToken;
+export type PhoneActionTypes = PhoneAction;

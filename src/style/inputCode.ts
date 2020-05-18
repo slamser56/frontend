@@ -7,15 +7,6 @@ export const Container = styled.View({
   alignItems: 'center',
 });
 
-export const Title = styled.Text({
-  height: '50px',
-  width: '270px',
-  textAlign: 'center',
-  color: '#000',
-  fontSize: '30px',
-  marginBottom: '20px',
-});
-
 export const Input = styled.TextInput({
   background: '#C2C2C2',
   borderRadius: '10px',
@@ -25,8 +16,11 @@ export const Input = styled.TextInput({
   marginBottom: '20px',
 });
 
-export const Button = styled.Button({
-  background: 'palevioletred',
-  height: '50px',
-  width: '50px',
+export const Button = styled.TouchableOpacity({
+  color: '#f194ff',
+  width: 200,
+  height: 50,
+  backgroundColor: '#C2C2C2',
+  borderRadius: 15,
+  justifyContent: 'center',
 });

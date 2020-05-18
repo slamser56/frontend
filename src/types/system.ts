@@ -3,12 +3,13 @@ export interface SystemState {
 }
 
 export enum ConstantsSystem {
-  CHECK_CONNECT = 'CHECK_CONNECT',
+  SUCCESS_CONNECT = 'SUCCESS_CONNECT',
+  FAIL_CONNECT = 'FAIL_CONNECT',
 }
 
-interface CheckConnectAction {
-  type: typeof ConstantsSystem.CHECK_CONNECT;
+interface SystemAction {
+  type: ConstantsSystem.SUCCESS_CONNECT | ConstantsSystem.FAIL_CONNECT;
   payload: SystemState;
 }
 
-export type SystemActionTypes = CheckConnectAction;
+export type SystemActionTypes = SystemAction;

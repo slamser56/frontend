@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const instance = axios.create({
+export const api = axios.create({
   baseURL: 'http://192.168.100.3:5000/api/',
-  timeout: 2000,
+  timeout: 15000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ export const instance = axios.create({
   },
 });
 
-instance.interceptors.response.use(
+api.interceptors.response.use(
   function (response: any) {
     const { status, data } = response;
     switch (status) {

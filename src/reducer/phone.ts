@@ -10,27 +10,19 @@ export function phoneReducer(
   action: PhoneActionTypes,
 ): PhoneState {
   switch (action.type) {
-    case ConstantsPhone.SEND_CODE:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case ConstantsPhone.VERIFY_CODE:
+    case ConstantsPhone.SEND_CODE_OK:
+    case ConstantsPhone.VERIFY_CODE_OK:
+    case ConstantsPhone.VERIFY_TOKEN_OK:
       return {
         ...state,
         ...action.payload,
       };
     case ConstantsPhone.LOG_OUT:
-      return {
-        ...state,
-        ...action.payload,
-      };
-    case ConstantsPhone.CHECK_TOKEN:
-      return {
-        ...state,
-        ...action.payload,
-      };
+    case ConstantsPhone.SEND_CODE_BAD:
+    case ConstantsPhone.VERIFY_CODE_BAD:
+    case ConstantsPhone.VERIFY_TOKEN_BAD:
+      return initialStatePhone;
     default:
-      return state;
+      return state; //!!!!!
   }
 }

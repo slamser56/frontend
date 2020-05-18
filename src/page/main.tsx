@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Text, Button, TextButton } from '../style/main';
+import { Container, Button } from '../style/main';
+import { Text } from '../style';
 import { ListAppState } from '../types';
 import { checkConnect, logOut, checkToken } from '../action';
 import { StackNavigationRoutes } from '../page';
@@ -28,22 +29,24 @@ export default function Main() {
     <Container>
       {system.connected ? (
         <>
-          <Text>Connected to api</Text>
+          <Text fontSize="40px" marginBottom="20px">
+            Connected to api
+          </Text>
           {phone.token ? (
             <>
               <Text>Your phone number: {phone.phoneNumber}</Text>
               <Button onPress={handleLogOut}>
-                <Text>Log out</Text>
+                <Text fontSize="20px">Log out</Text>
               </Button>
             </>
           ) : (
             <Button onPress={handleClick}>
-              <TextButton>Go to Registration</TextButton>
+              <Text fontSize="20px">Go to Registration</Text>
             </Button>
           )}
         </>
       ) : (
-        <Text>Don't connected to api</Text>
+        <Text color="red">Don't connected to api</Text>
       )}
     </Container>
   );

@@ -1,1 +1,1 @@
-export * as main from './main';
+export * from './style';
