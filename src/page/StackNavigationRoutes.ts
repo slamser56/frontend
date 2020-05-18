@@ -1,5 +1,6 @@
 export enum StackNavigationRoutes {
-  HOME = 'Home',
-  ENTRY = 'Entry',
-  INPUT_CODE = 'InputCode',
+  HOME = 'HOME',
+  ENTRY = 'ENTRY',
+  INPUT_CODE = 'INPUT_CODE',
+  PROFILE = 'PROFILE',
 }

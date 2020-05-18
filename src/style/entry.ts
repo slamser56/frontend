@@ -1,12 +1,5 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View({
-  flex: '1',
-  backgroundColor: '#fff',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
-
 export const Input = styled.TextInput({
   background: '#C2C2C2',
   borderRadius: '10px',

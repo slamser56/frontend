@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Button } from '../style/main';
-import { Text } from '../style';
+import { Button } from '../style/main';
+import { Text, Container } from '../style';
 import { ListAppState } from '../types';
 import { checkConnect, logOut, checkToken } from '../action';
 import { StackNavigationRoutes } from '../page';

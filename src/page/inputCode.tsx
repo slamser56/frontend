@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { verifyCode } from '../action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { Container, Input, Button } from '../style/inputCode';
+import { Input, Button } from '../style/inputCode';
 import { ListAppState } from '../types';
 import { StackNavigationRoutes } from '../page';
-import { Text } from '../style';
+import { Text, Container } from '../style';
 import { Formik } from 'formik';
 import { schemaCode } from '../validationSchema';
 
