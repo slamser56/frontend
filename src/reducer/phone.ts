@@ -23,6 +23,6 @@ export function phoneReducer(
     case ConstantsPhone.VERIFY_TOKEN_BAD:
       return initialStatePhone;
     default:
-      return state;
+      return { ...state };
   }
 }

@@ -19,6 +19,6 @@ export function profileReducer(
     case ConstantsProfile.GET_AVATAR_BAD:
       return initialStateProfile;
     default:
-      return state;
+      return { ...state };
   }
 }

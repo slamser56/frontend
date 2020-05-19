@@ -30,7 +30,9 @@ export default function Main() {
 
   async function handleUploadAvatar() {
     ImagePicker.launchImageLibrary(options, (response) => {
-      dispatch(uploadAvatar(response.data, phone.token));
+      if (!response.didCancel) {
+        dispatch(uploadAvatar(response.data, phone.token));
+      }
     });
   }
 
@@ -47,10 +49,14 @@ export default function Main() {
         <TextPanel top="10px">{phone.phoneNumber}</TextPanel>
         <ButtonPanel>
           <ButtonIcon onPress={handleUploadAvatar}>
-            <Text fontSize="20px">Загрузить аватар</Text>
+            <Text fontSize="20px" marginTop="5px">
+              Upload avatar
+            </Text>
           </ButtonIcon>
           <ButtonIcon>
-            <Text fontSize="20px">Загрузить фото</Text>
+            <Text fontSize="20px" marginTop="5px">
+              Write post
+            </Text>
           </ButtonIcon>
         </ButtonPanel>
       </Panel>

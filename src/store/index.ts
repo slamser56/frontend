@@ -7,8 +7,9 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const persistConfig = {
-  key: 'root',
+  key: 'phone',
   storage: AsyncStorage,
+  whitelist: ['phone'],
 };
 
 const rootReducer = combineReducers<ListAppState>({
@@ -22,6 +23,5 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middleware = applyMiddleware(thunk, logger);
 const store = createStore(persistedReducer, middleware);
 const persistor = persistStore(store);
-export type RootState = ReturnType<typeof rootReducer>;
 
-export { store, persistor, rootReducer };
+export { store, persistor };
