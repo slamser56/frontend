@@ -10,7 +10,7 @@ type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 export const verifyCode = (
   code: string,
   phoneNumber: string,
-): AppThunk => async (dispatch) => {
+): AppThunk => async (dispatch): Promise<string | void> => {
   try {
     const { token } = await api.post('/phone/codeVerify', {
       phoneNumber,
@@ -34,7 +34,7 @@ export const verifyCode = (
   }
 };
 
-export const sendCode = (phoneNumber: string): AppThunk => async (dispatch) => {
+export const sendCode = (phoneNumber: string): AppThunk => async (dispatch): Promise<string | void> => {
   try {
     await api.post('/phone/sendCode', { phoneNumber });
     dispatch({
@@ -52,7 +52,7 @@ export const sendCode = (phoneNumber: string): AppThunk => async (dispatch) => {
   }
 };
 
-export const checkToken = (token: string): AppThunk => async (dispatch) => {
+export const checkToken = (token: string): AppThunk => async (dispatch): Promise<boolean> => {
   try {
     await api.post('/phone/verifyToken', { token });
     dispatch({
@@ -67,7 +67,7 @@ export const checkToken = (token: string): AppThunk => async (dispatch) => {
   }
 };
 
-export const logOut = (): AppThunk => async (dispatch) => {
+export const logOut = (): AppThunk => async (dispatch): Promise<void> => {
   dispatch({
     type: ConstantsPhone.LOG_OUT,
   });

@@ -9,7 +9,7 @@ import profile from '../page/profile';
 
 const Stack = createStackNavigator();
 
-export default function Navigation() {
+export default function Navigation(): Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={StackNavigationRoutes.HOME}>

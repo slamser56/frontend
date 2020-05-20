@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text, Container, Button } from '../../style';
+import { Text } from '../../style/text';
+import { Container } from '../../style/view';
+import { Button } from '../../style/button';
 import { ListAppState } from '../../stateManager/listTypes';
 import { logOut, checkToken } from '../../stateManager/phone/action';
 import checkConnect from '../../stateManager/system/action';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 
-export default function Main() {
+export default function Main(): Element {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -18,13 +20,13 @@ export default function Main() {
     dispatch(checkToken(phone.token));
   }, []);
 
-  function handleClick() {
+  function handleClick(): void {
     navigation.navigate(StackNavigationRoutes.ENTRY);
   }
-  function handleClickProfile() {
+  function handleClickProfile(): void {
     navigation.navigate(StackNavigationRoutes.PROFILE);
   }
-  function handleLogOut() {
+  function handleLogOut(): void {
     dispatch(logOut());
   }
 
@@ -32,7 +34,7 @@ export default function Main() {
     <Container>
       {system.connected ? (
         <>
-          <Text fontSize="40px" marginBottom="20px">
+          <Text fontSize="40px" mb="20px">
             Connected to api
           </Text>
           {phone.token ? (

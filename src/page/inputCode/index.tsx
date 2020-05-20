@@ -5,12 +5,13 @@ import { Formik } from 'formik';
 import { verifyCode } from '../../stateManager/phone/action';
 import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
-import {
-  Text, Container, Input, Button,
-} from '../../style';
+import Input from '../../style/textInput';
+import { Text } from '../../style/text';
+import { Container } from '../../style/view';
+import { Button } from '../../style/button';
 import schemaCode from './validationSchema';
 
-export default function Entry() {
+export default function Entry(): Element {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const phone = useSelector((state: ListAppState) => state.phone);
@@ -26,7 +27,7 @@ export default function Entry() {
     }
   }, [navigation, status]);
 
-  async function handleClick(code: string) {
+  async function handleClick(code: string): Promise<void> {
     try {
       await dispatch(verifyCode(code, phone.phoneNumber));
       setStatus(true);
@@ -38,7 +39,7 @@ export default function Entry() {
   return (
     <Formik
       initialValues={{ code: '' }}
-      onSubmit={(values) => handleClick(values.code)}
+      onSubmit={(values): Promise<void> => handleClick(values.code)}
       validationSchema={schemaCode}
     >
       {({
@@ -50,7 +51,7 @@ export default function Entry() {
         errors,
       }) => (
         <Container>
-          <Text fontSize="40px" marginBottom="20px">
+          <Text fontSize="40px" mb="20px">
             Entry code
           </Text>
           <Input

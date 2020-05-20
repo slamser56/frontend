@@ -6,7 +6,7 @@ import api from '../../api';
 
 type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 
-const checkConnect = (): AppThunk => async (dispatch) => {
+const checkConnect = (): AppThunk => async (dispatch): Promise<boolean> => {
   try {
     await api.post('/');
     dispatch({

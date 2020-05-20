@@ -3,13 +3,14 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { sendCode } from '../../stateManager/phone/action';
-import {
-  Text, Container, Input, Button,
-} from '../../style';
+import { Text } from '../../style/text';
+import { Container } from '../../style/view';
+import { Button } from '../../style/button';
+import Input from '../../style/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 
-export default function Entry() {
+export default function Entry(): Element {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -24,7 +25,7 @@ export default function Entry() {
     }
   }, [navigation, status]);
 
-  async function handleClick(phoneNumber: string) {
+  async function handleClick(phoneNumber: string): Promise<void> {
     try {
       await dispatch(sendCode(phoneNumber));
       setStatus(true);
@@ -36,7 +37,7 @@ export default function Entry() {
   return (
     <Formik
       initialValues={{ phoneNumber: '' }}
-      onSubmit={(values) => handleClick(values.phoneNumber)}
+      onSubmit={(values): Promise<void> => handleClick(values.phoneNumber)}
       validationSchema={schemaPhoneNumber}
     >
       {({
@@ -48,7 +49,7 @@ export default function Entry() {
         errors,
       }) => (
         <Container>
-          <Text fontSize="40px" marginBottom="20px">
+          <Text fontSize="40px" mb="20px">
             Entry phone number
           </Text>
           <Input
