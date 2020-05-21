@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text } from '../../style/text';
-import { Container } from '../../style/view';
-import { Button } from '../../style/button';
+import { Text } from '../../components/text';
+import { Container } from '../../components/view';
+import { Button } from '../../components/button';
 import { ListAppState } from '../../stateManager/listTypes';
 import { logOut, checkToken } from '../../stateManager/phone/action';
 import checkConnect from '../../stateManager/system/action';
@@ -43,10 +43,10 @@ export default function Main(): Element {
                 Your phone number:
                 {phone.phoneNumber}
               </Text>
-              <Button onPress={handleLogOut}>
+              <Button mt="10px" onPress={handleLogOut}>
                 <Text fontSize="20px">Log out</Text>
               </Button>
-              <Button style={{ marginTop: 10 }} onPress={handleClickProfile}>
+              <Button mt="10px" onPress={handleClickProfile}>
                 <Text fontSize="20px">Profile</Text>
               </Button>
             </>

@@ -9,7 +9,7 @@ type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 
 export const verifyCode = (
   code: string,
-  phoneNumber: string,
+  phoneNumber: number,
 ): AppThunk => async (dispatch): Promise<string | void> => {
   try {
     const { token } = await api.post('/phone/codeVerify', {
@@ -34,7 +34,7 @@ export const verifyCode = (
   }
 };
 
-export const sendCode = (phoneNumber: string): AppThunk => async (dispatch): Promise<string | void> => {
+export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Promise<string | void> => {
   try {
     await api.post('/phone/sendCode', { phoneNumber });
     dispatch({

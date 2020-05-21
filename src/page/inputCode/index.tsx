@@ -5,10 +5,10 @@ import { Formik } from 'formik';
 import { verifyCode } from '../../stateManager/phone/action';
 import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
-import Input from '../../style/textInput';
-import { Text } from '../../style/text';
-import { Container } from '../../style/view';
-import { Button } from '../../style/button';
+import { Input } from '../../components/textInput';
+import { Text } from '../../components/text';
+import { Container } from '../../components/view';
+import { Button } from '../../components/button';
 import schemaCode from './validationSchema';
 
 export default function Entry(): Element {
@@ -62,8 +62,7 @@ export default function Entry(): Element {
           />
           {(touched.code && errors.code) || message ? (
             <Text fontSize="20px" color="red">
-              {errors.code}
-              {message}
+              {errors.code || message}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

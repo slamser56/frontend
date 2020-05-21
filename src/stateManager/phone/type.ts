@@ -1,5 +1,5 @@
 export interface PhoneState {
-  phoneNumber: string;
+  phoneNumber: number;
   token: string;
 }
 

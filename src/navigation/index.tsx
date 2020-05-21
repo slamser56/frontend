@@ -6,6 +6,7 @@ import main from '../page/main';
 import entry from '../page/entry';
 import inputCode from '../page/inputCode';
 import profile from '../page/profile';
+import writePost from '../page/writePost';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,10 @@ export default function Navigation(): Element {
         <Stack.Screen
           name={StackNavigationRoutes.PROFILE}
           component={profile}
+        />
+        <Stack.Screen
+          name={StackNavigationRoutes.WRITE_POST}
+          component={writePost}
         />
       </Stack.Navigator>
     </NavigationContainer>

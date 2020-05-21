@@ -1,11 +1,11 @@
 import { SystemState, SystemActionTypes, ConstantsSystem } from './type';
 
-const initialStateSystem: SystemState = {
+const initialState: SystemState = {
   connected: false,
 };
 
-function systemReducer(
-  state = initialStateSystem,
+function system(
+  state = initialState,
   action: SystemActionTypes,
 ): SystemState {
   switch (action.type) {
@@ -15,10 +15,10 @@ function systemReducer(
         ...action.payload,
       };
     case ConstantsSystem.CONNECT_FAIL:
-      return initialStateSystem;
+      return initialState;
     default:
       return { ...state };
   }
 }
 
-export default systemReducer;
+export default system;

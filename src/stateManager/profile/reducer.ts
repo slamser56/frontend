@@ -1,11 +1,11 @@
 import { ProfileState, ProfileActionTypes, ConstantsProfile } from './type';
 
-const initialStateProfile: ProfileState = {
+const initialState: ProfileState = {
   avatar: '',
 };
 
-function profileReducer(
-  state = initialStateProfile,
+export default function profile(
+  state = initialState,
   action: ProfileActionTypes,
 ): ProfileState {
   switch (action.type) {
@@ -17,10 +17,8 @@ function profileReducer(
         ...action.payload,
       };
     case ConstantsProfile.GET_AVATAR_FAIL:
-      return initialStateProfile;
+      return initialState;
     default:
       return { ...state };
   }
 }
-
-export default profileReducer;

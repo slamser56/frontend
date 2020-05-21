@@ -8,7 +8,7 @@ type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 
 export const uploadAvatar = (image: string, token: string): AppThunk => async (
   dispatch,
-) => {
+): Promise<void | string> => {
   try {
     const { avatar } = await api.post('/profile/uploadAvatar', {
       image,

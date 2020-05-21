@@ -3,10 +3,10 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { sendCode } from '../../stateManager/phone/action';
-import { Text } from '../../style/text';
-import { Container } from '../../style/view';
-import { Button } from '../../style/button';
-import Input from '../../style/textInput';
+import { Text } from '../../components/text';
+import { Container } from '../../components/view';
+import { Button } from '../../components/button';
+import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 
@@ -27,7 +27,7 @@ export default function Entry(): Element {
 
   async function handleClick(phoneNumber: string): Promise<void> {
     try {
-      await dispatch(sendCode(phoneNumber));
+      await dispatch(sendCode(Number(phoneNumber)));
       setStatus(true);
     } catch (error) {
       setMessage(error);

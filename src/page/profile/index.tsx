@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
-import { TextPanel, Text } from '../../style/text';
-import { ButtonIcon } from '../../style/button';
-import Avatar from '../../style/image';
-import { Panel, ButtonPanel, Container } from '../../style/view';
+import { TextPanel, Text } from '../../components/text';
+import { ButtonIcon } from '../../components/button';
+import Avatar from '../../components/image';
+import { Panel, ButtonPanel, Container } from '../../components/view';
 import { ListAppState } from '../../stateManager/listTypes';
 import { uploadAvatar, getAvatar } from '../../stateManager/profile/action';
+import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 
 const options = {
   title: 'Select Avatar',
@@ -18,6 +20,7 @@ const options = {
 
 export default function Main(): Element {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const { phone, profile } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
@@ -36,6 +39,10 @@ export default function Main(): Element {
     });
   }
 
+  async function handleWritePost(): Promise<void> {
+    navigation.navigate(StackNavigationRoutes.WRITE_POST);
+  }
+
   return (
     <Container>
       <Panel>
@@ -51,12 +58,12 @@ export default function Main(): Element {
         <TextPanel top="10px">{phone.phoneNumber}</TextPanel>
         <ButtonPanel>
           <ButtonIcon onPress={handleUploadAvatar}>
-            <Text fontSize="20px" mt="5px">
+            <Text fontSize="20px">
               Upload avatar
             </Text>
           </ButtonIcon>
-          <ButtonIcon>
-            <Text fontSize="20px" mt="5px">
+          <ButtonIcon onPress={handleWritePost} ml="10px">
+            <Text fontSize="20px">
               Write post
             </Text>
           </ButtonIcon>

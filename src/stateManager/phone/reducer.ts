@@ -1,12 +1,12 @@
 import { PhoneState, PhoneActionTypes, ConstantsPhone } from './type';
 
-const initialStatePhone: PhoneState = {
-  phoneNumber: '',
+const initialState: PhoneState = {
+  phoneNumber: 0,
   token: '',
 };
 
-export default function phoneReducer(
-  state = initialStatePhone,
+export default function phone(
+  state = initialState,
   action: PhoneActionTypes,
 ): PhoneState {
   switch (action.type) {
@@ -21,7 +21,7 @@ export default function phoneReducer(
     case ConstantsPhone.LOG_OUT:
     case ConstantsPhone.SEND_CODE_FAILED:
     case ConstantsPhone.VERIFY_TOKEN_FAILED:
-      return initialStatePhone;
+      return initialState;
     default:
       return state;
   }
