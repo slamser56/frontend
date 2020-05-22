@@ -3,18 +3,14 @@ export interface ProfileState {
 }
 
 export enum ConstantsProfile {
-  GET_AVATAR_SUCCESS = 'GET_AVATAR_SUCCESS',
-  GET_AVATAR_FAIL = 'GET_AVATAR_FAIL',
+  DOWNLOAD_AVATAR_SUCCESS = 'DOWNLOAD_AVATAR_SUCCESS',
+  DOWNLOAD_AVATAR_FAIL = 'DOWNLOAD_AVATAR_FAIL',
   UPLOAD_AVATAR_SUCCESS = 'UPLOAD_AVATAR_SUCCESS',
   UPLOAD_AVATAR_FAIL = 'UPLOAD_AVATAR_FAIL',
 }
 
 interface ProfileAction {
-  type:
-  | ConstantsProfile.GET_AVATAR_SUCCESS
-  | ConstantsProfile.GET_AVATAR_FAIL
-  | ConstantsProfile.UPLOAD_AVATAR_SUCCESS
-  | ConstantsProfile.UPLOAD_AVATAR_FAIL;
+  type: ConstantsProfile;
   payload: ProfileState;
 }
 

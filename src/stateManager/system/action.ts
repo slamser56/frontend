@@ -1,28 +1,24 @@
-import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from '../store';
 import { ConstantsSystem } from './type';
 import api from '../../api';
+import { AppThunk } from '../thunkType';
+import apiConstants from '../../api/apiConstants';
 
-type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
-
-const checkConnect = (): AppThunk => async (dispatch): Promise<boolean> => {
+const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    await api.post('/');
+    await api.post(apiConstants.ROOT);
     dispatch({
       type: ConstantsSystem.CONNECT_SUCCESS,
       payload: {
         connected: true,
       },
     });
-    return true;
-  } catch (err) {
+    return Promise.resolve();
+  } catch (error) {
     dispatch({
       type: ConstantsSystem.CONNECT_FAIL,
     });
-    return false;
+    return Promise.reject('Do not connect');
   }
 };
-
 
 export default checkConnect;

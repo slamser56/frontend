@@ -8,7 +8,7 @@ export enum ConstantsSystem {
 }
 
 interface SystemAction {
-  type: ConstantsSystem.CONNECT_SUCCESS | ConstantsSystem.CONNECT_FAIL;
+  type: ConstantsSystem;
   payload: SystemState;
 }
 

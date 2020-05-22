@@ -6,9 +6,12 @@ module.exports = {
     },
     extends: [
       "plugin:react/recommended",
-       "plugin:@typescript-eslint/recommended"
+      "plugin:@typescript-eslint/recommended"
      ],
     jsxBracketSameLine: true,
     singleQuote: true,
     trailingComma: 'all',
+    semi: true,
+    printWidth: 120,
+    tabWidth: 2,
   };

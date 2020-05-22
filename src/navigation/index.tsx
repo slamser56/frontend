@@ -16,18 +16,9 @@ export default function Navigation(): Element {
       <Stack.Navigator initialRouteName={StackNavigationRoutes.HOME}>
         <Stack.Screen name={StackNavigationRoutes.HOME} component={main} />
         <Stack.Screen name={StackNavigationRoutes.ENTRY} component={entry} />
-        <Stack.Screen
-          name={StackNavigationRoutes.INPUT_CODE}
-          component={inputCode}
-        />
-        <Stack.Screen
-          name={StackNavigationRoutes.PROFILE}
-          component={profile}
-        />
-        <Stack.Screen
-          name={StackNavigationRoutes.WRITE_POST}
-          component={writePost}
-        />
+        <Stack.Screen name={StackNavigationRoutes.INPUT_CODE} component={inputCode} />
+        <Stack.Screen name={StackNavigationRoutes.PROFILE} component={profile} />
+        <Stack.Screen name={StackNavigationRoutes.WRITE_POST} component={writePost} />
       </Stack.Navigator>
     </NavigationContainer>
   );

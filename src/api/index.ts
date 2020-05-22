@@ -1,17 +1,19 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import apiConstants from './apiConstants';
 
 const api = axios.create({
-  baseURL: 'http://192.168.100.3:5000/api/',
+  baseURL: apiConstants.ADDRESS,
   timeout: 15000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'access-control-allow-credentials': 'true',
+    Authorization: '',
   },
 });
 
 api.interceptors.response.use(
-  (response: any) => {
+  (response: AxiosResponse) => {
     const { status, data } = response;
     switch (status) {
       case 200:
@@ -20,7 +22,11 @@ api.interceptors.response.use(
         return Promise.reject();
     }
   },
-  (error) => Promise.reject(error),
+  (error: string) => Promise.reject(error),
 );
+
+export const autorizeApi: (token?: string) => void = (token?: string) => {
+  api.defaults.headers.Authorization = token ? `Bearer ${token}` : null;
+};
 
 export default api;

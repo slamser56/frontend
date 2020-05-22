@@ -8,7 +8,6 @@ import phone from '../phone/reducer';
 import system from '../system/reducer';
 import profile from '../profile/reducer';
 
-
 const persistConfig = {
   key: 'phone',
   storage: AsyncStorage,

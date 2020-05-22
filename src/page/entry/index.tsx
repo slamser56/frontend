@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { sendCode } from '../../stateManager/phone/action';
-import { Text } from '../../components/text';
+import Text from '../../components/text';
 import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import { Input } from '../../components/textInput';
@@ -40,16 +40,9 @@ export default function Entry(): Element {
       onSubmit={(values): Promise<void> => handleClick(values.phoneNumber)}
       validationSchema={schemaPhoneNumber}
     >
-      {({
-        handleChange,
-        handleBlur,
-        touched,
-        handleSubmit,
-        values,
-        errors,
-      }) => (
+      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
         <Container>
-          <Text fontSize="40px" mb="20px">
+          <Text fontSize={40} mb={20}>
             Entry phone number
           </Text>
           <Input
@@ -59,13 +52,13 @@ export default function Entry(): Element {
             value={values.phoneNumber}
           />
           {(touched.phoneNumber && errors.phoneNumber) || message ? (
-            <Text fontSize="20px" color="red">
+            <Text fontSize={20} color="red">
               {errors.phoneNumber}
               {message}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize="20px">OK</Text>
+            <Text fontSize={20}>OK</Text>
           </Button>
         </Container>
       )}

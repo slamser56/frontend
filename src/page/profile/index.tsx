@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
-import { TextPanel, Text } from '../../components/text';
+import Toast from 'react-native-simple-toast';
+import lodash from 'lodash';
+import Text from '../../components/text';
 import { ButtonIcon } from '../../components/button';
 import Avatar from '../../components/image';
-import { Panel, ButtonPanel, Container } from '../../components/view';
+import { Panel, ButtonPanel, ContainerFixed, ContainerRow } from '../../components/view';
 import { ListAppState } from '../../stateManager/listTypes';
-import { uploadAvatar, getAvatar } from '../../stateManager/profile/action';
+import { uploadAvatar, downloadAvatar } from '../../stateManager/profile/action';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 
 const options = {
@@ -26,15 +28,21 @@ export default function Main(): Element {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        await dispatch(getAvatar(phone.token));
-      } catch (error) {}
+        await dispatch(downloadAvatar());
+      } catch (error) {
+        Toast.show(error);
+      }
     })();
   }, [profile.avatar]);
 
   async function handleUploadAvatar(): Promise<void> {
-    ImagePicker.launchImageLibrary(options, (response) => {
-      if (!response.didCancel) {
-        dispatch(uploadAvatar(response.data, phone.token));
+    ImagePicker.launchImageLibrary(options, async response => {
+      try {
+        if (!response.didCancel) {
+          await dispatch(uploadAvatar(response.data));
+        }
+      } catch (error) {
+        Toast.show(error);
       }
     });
   }
@@ -44,31 +52,37 @@ export default function Main(): Element {
   }
 
   return (
-    <Container>
+    <ContainerFixed>
       <Panel>
-        <Avatar
-          source={
-            profile.avatar
-              ? { uri: profile.avatar }
-              : require('../../image/avatar.png')
-          }
-        />
-        <TextPanel>Profile</TextPanel>
-        <TextPanel>Profile phone number:</TextPanel>
-        <TextPanel top="10px">{phone.phoneNumber}</TextPanel>
+        <ContainerRow>
+          <ContainerFixed>
+            <Text ml={10} textAlign="left" fontSize={20}>
+              Profile
+            </Text>
+            <Text ml={10} mt={10} textAlign="left" fontSize={20}>
+              Profile phone number:
+            </Text>
+            <Text ml={10} mt={10} textAlign="left" fontSize={20}>
+              {phone.phoneNumber}
+            </Text>
+          </ContainerFixed>
+          <ContainerFixed>
+            <Avatar
+              mt={10}
+              mr={10}
+              source={lodash.get(profile, 'avatar', '') ? { uri: profile.avatar } : require('../../image/avatar.png')}
+            />
+          </ContainerFixed>
+        </ContainerRow>
         <ButtonPanel>
           <ButtonIcon onPress={handleUploadAvatar}>
-            <Text fontSize="20px">
-              Upload avatar
-            </Text>
+            <Text fontSize={20}>Upload avatar</Text>
           </ButtonIcon>
-          <ButtonIcon onPress={handleWritePost} ml="10px">
-            <Text fontSize="20px">
-              Write post
-            </Text>
+          <ButtonIcon onPress={handleWritePost} ml={10}>
+            <Text fontSize={20}>Write post</Text>
           </ButtonIcon>
         </ButtonPanel>
       </Panel>
-    </Container>
+    </ContainerFixed>
   );
 }

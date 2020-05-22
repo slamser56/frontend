@@ -4,10 +4,7 @@ const initialState: SystemState = {
   connected: false,
 };
 
-function system(
-  state = initialState,
-  action: SystemActionTypes,
-): SystemState {
+function system(state = initialState, action: SystemActionTypes): SystemState {
   switch (action.type) {
     case ConstantsSystem.CONNECT_SUCCESS:
       return {

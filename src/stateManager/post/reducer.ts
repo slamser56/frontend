@@ -7,10 +7,7 @@ const initialState: PostState = {
   images: [],
 };
 
-export default function post(
-  state = initialState,
-  action: PostActionTypes,
-): PostState {
+export default function post(state = initialState, action: PostActionTypes): PostState {
   switch (action.type) {
     case ConstantsPost.UPLOAD_POST_SUCCESS:
       return {

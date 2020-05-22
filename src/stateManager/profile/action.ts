@@ -1,18 +1,12 @@
-import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from '../store';
+import { AppThunk } from '../thunkType';
 import { ConstantsProfile } from './type';
 import api from '../../api';
+import apiConstants from '../../api/apiConstants';
 
-type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
-
-export const uploadAvatar = (image: string, token: string): AppThunk => async (
-  dispatch,
-): Promise<void | string> => {
+export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar } = await api.post('/profile/uploadAvatar', {
+    const { avatar } = await api.post(apiConstants.UPLOAD_AVATAR, {
       image,
-      token,
     });
     dispatch({
       type: ConstantsProfile.UPLOAD_AVATAR_SUCCESS,
@@ -21,7 +15,7 @@ export const uploadAvatar = (image: string, token: string): AppThunk => async (
       },
     });
     return Promise.resolve();
-  } catch (err) {
+  } catch (error) {
     dispatch({
       type: ConstantsProfile.UPLOAD_AVATAR_FAIL,
     });
@@ -29,21 +23,19 @@ export const uploadAvatar = (image: string, token: string): AppThunk => async (
   }
 };
 
-export const getAvatar = (token: string): AppThunk => async (dispatch): Promise<void | string> => {
+export const downloadAvatar = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar } = await api.post('/profile/getAvatar', {
-      token,
-    });
+    const { avatar } = await api.post(apiConstants.DOWNLOAD_AVATAR);
     dispatch({
-      type: ConstantsProfile.GET_AVATAR_SUCCESS,
+      type: ConstantsProfile.DOWNLOAD_AVATAR_SUCCESS,
       payload: {
         avatar,
       },
     });
     return Promise.resolve();
-  } catch (err) {
+  } catch (error) {
     dispatch({
-      type: ConstantsProfile.GET_AVATAR_FAIL,
+      type: ConstantsProfile.DOWNLOAD_AVATAR_FAIL,
     });
     return Promise.reject('Something wrong');
   }

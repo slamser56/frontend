@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import { Text } from '../../components/text';
+import Toast from 'react-native-simple-toast';
+import lodash from 'lodash';
+import Text from '../../components/text';
 import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import { ListAppState } from '../../stateManager/listTypes';
@@ -13,11 +15,17 @@ export default function Main(): Element {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { phone, system } = useSelector((state: ListAppState) => state);
+  const { phone } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    dispatch(checkConnect());
-    dispatch(checkToken(phone.token));
+    (async (): Promise<void> => {
+      try {
+        await dispatch(checkConnect());
+        if (phone.token) await dispatch(checkToken(phone.token));
+      } catch (error) {
+        Toast.show(error);
+      }
+    })();
   }, []);
 
   function handleClick(): void {
@@ -27,37 +35,32 @@ export default function Main(): Element {
     navigation.navigate(StackNavigationRoutes.PROFILE);
   }
   function handleLogOut(): void {
-    dispatch(logOut());
+    try {
+      dispatch(logOut());
+    } catch (error) {
+      Toast.show(error);
+    }
   }
 
   return (
     <Container>
-      {system.connected ? (
+      {lodash.get(phone, 'token', '') ? (
         <>
-          <Text fontSize="40px" mb="20px">
-            Connected to api
+          <Text>
+            Your phone number:
+            {phone.phoneNumber}
           </Text>
-          {phone.token ? (
-            <>
-              <Text>
-                Your phone number:
-                {phone.phoneNumber}
-              </Text>
-              <Button mt="10px" onPress={handleLogOut}>
-                <Text fontSize="20px">Log out</Text>
-              </Button>
-              <Button mt="10px" onPress={handleClickProfile}>
-                <Text fontSize="20px">Profile</Text>
-              </Button>
-            </>
-          ) : (
-            <Button onPress={handleClick}>
-              <Text fontSize="20px">Go to Registration</Text>
-            </Button>
-          )}
+          <Button mt={10} onPress={handleLogOut}>
+            <Text fontSize={20}>Log out</Text>
+          </Button>
+          <Button mt={10} onPress={handleClickProfile}>
+            <Text fontSize={20}>Profile</Text>
+          </Button>
         </>
       ) : (
-        <Text color="red">Don&#39;t connected to api</Text>
+        <Button onPress={handleClick}>
+          <Text fontSize={20}>Go to Registration</Text>
+        </Button>
       )}
     </Container>
   );

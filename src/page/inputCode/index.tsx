@@ -6,7 +6,7 @@ import { verifyCode } from '../../stateManager/phone/action';
 import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { Input } from '../../components/textInput';
-import { Text } from '../../components/text';
+import Text from '../../components/text';
 import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import schemaCode from './validationSchema';
@@ -42,16 +42,9 @@ export default function Entry(): Element {
       onSubmit={(values): Promise<void> => handleClick(values.code)}
       validationSchema={schemaCode}
     >
-      {({
-        handleChange,
-        handleBlur,
-        touched,
-        handleSubmit,
-        values,
-        errors,
-      }) => (
+      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
         <Container>
-          <Text fontSize="40px" mb="20px">
+          <Text fontSize={40} mb={20}>
             Entry code
           </Text>
           <Input
@@ -61,12 +54,12 @@ export default function Entry(): Element {
             value={values.code}
           />
           {(touched.code && errors.code) || message ? (
-            <Text fontSize="20px" color="red">
+            <Text fontSize={20} color="red">
               {errors.code || message}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize="20px">OK</Text>
+            <Text fontSize={20}>OK</Text>
           </Button>
         </Container>
       )}
