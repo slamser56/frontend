@@ -12,7 +12,7 @@ export default function post(state = initialState, action: PostActionTypes): Pos
     case ConstantsPost.UPLOAD_POST_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...(action.payload || {}),
       };
     case ConstantsPost.UPLOAD_POST_FAIL:
       return initialState;

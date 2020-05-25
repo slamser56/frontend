@@ -8,8 +8,9 @@ import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import { ListAppState } from '../../stateManager/listTypes';
 import { logOut, checkToken } from '../../stateManager/phone/action';
-import checkConnect from '../../stateManager/system/action';
+import { checkConnect, setLanguage } from '../../stateManager/system/action';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { t } from '../../lang';
 
 export default function Main(): Element {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ export default function Main(): Element {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
+        await dispatch( setLanguage('en'))
         await dispatch(checkConnect());
         if (phone.token) await dispatch(checkToken(phone.token));
       } catch (error) {
@@ -47,19 +49,20 @@ export default function Main(): Element {
       {lodash.get(phone, 'token', '') ? (
         <>
           <Text>
-            Your phone number:
+            {t('Your phone number')}
+            :
             {phone.phoneNumber}
           </Text>
           <Button mt={10} onPress={handleLogOut}>
-            <Text fontSize={20}>Log out</Text>
+            <Text fontSize={20}>{t('Log out')}</Text>
           </Button>
           <Button mt={10} onPress={handleClickProfile}>
-            <Text fontSize={20}>Profile</Text>
+            <Text fontSize={20}>{t('Profile')}</Text>
           </Button>
         </>
       ) : (
         <Button onPress={handleClick}>
-          <Text fontSize={20}>Go to Registration</Text>
+          <Text fontSize={20}>{t('Go to Registration')}</Text>
         </Button>
       )}
     </Container>

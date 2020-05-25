@@ -9,6 +9,7 @@ import { Button } from '../../components/button';
 import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
+import { t } from '../../lang';
 
 export default function Entry(): Element {
   const navigation = useNavigation();
@@ -43,7 +44,7 @@ export default function Entry(): Element {
       {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
         <Container>
           <Text fontSize={40} mb={20}>
-            Entry phone number
+            {t('Entry phone number')}
           </Text>
           <Input
             placeholder="Entry phone number"
@@ -58,7 +59,7 @@ export default function Entry(): Element {
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize={20}>OK</Text>
+            <Text fontSize={20}>{t('OK')}</Text>
           </Button>
         </Container>
       )}

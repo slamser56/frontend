@@ -1,7 +1,7 @@
 import { AppThunk } from '../thunkType';
 import { ConstantsProfile } from './type';
 import api from '../../api';
-import apiConstants from '../../api/apiConstants';
+import apiConstants from '../../api/constants';
 
 export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {

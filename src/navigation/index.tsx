@@ -2,11 +2,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import StackNavigationRoutes from './StackNavigationRoutes';
-import main from '../page/main';
-import entry from '../page/entry';
-import inputCode from '../page/inputCode';
-import profile from '../page/profile';
-import writePost from '../page/writePost';
+import main from '../pages/main';
+import entry from '../pages/entry';
+import inputCode from '../pages/inputCode';
+import profile from '../pages/profile';
+import writePost from '../pages/writePost';
 
 const Stack = createStackNavigator();
 

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import apiConstants from './apiConstants';
+import apiConstants from './constants';
 
 const api = axios.create({
   baseURL: apiConstants.ADDRESS,
@@ -25,7 +25,7 @@ api.interceptors.response.use(
   (error: string) => Promise.reject(error),
 );
 
-export const autorizeApi: (token?: string) => void = (token?: string) => {
+export const autorizeApi = (token?: string):void => {
   api.defaults.headers.Authorization = token ? `Bearer ${token}` : null;
 };
 

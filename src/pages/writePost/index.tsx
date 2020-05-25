@@ -3,6 +3,7 @@ import Text from '../../components/text';
 import { Button } from '../../components/button';
 import { Container, ContainerScroll } from '../../components/view';
 import { InputNewPost } from '../../components/textInput';
+import { t } from '../../lang';
 
 export default function WritePost(): Element {
   const [text, setText] = useState('');
@@ -15,7 +16,7 @@ export default function WritePost(): Element {
     <Container>
       <ContainerScroll>
         <Text mt={20} textAlign="left">
-          Input text for post
+          {t('Input text for post')}
         </Text>
         <InputNewPost
           multiline
@@ -24,7 +25,7 @@ export default function WritePost(): Element {
           value={text}
         />
         <Button mt={20}>
-          <Text>Write</Text>
+          <Text>{t('Write')}</Text>
         </Button>
       </ContainerScroll>
     </Container>

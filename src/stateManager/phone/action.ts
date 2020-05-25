@@ -1,7 +1,7 @@
 import { ConstantsPhone } from './type';
 import api, { autorizeApi } from '../../api';
 import { AppThunk } from '../thunkType';
-import apiConstants from '../../api/apiConstants';
+import apiConstants from '../../api/constants';
 
 export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
   try {

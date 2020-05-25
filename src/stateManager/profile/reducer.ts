@@ -11,7 +11,7 @@ export default function profile(state = initialState, action: ProfileActionTypes
     case ConstantsProfile.UPLOAD_AVATAR_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...(action.payload || {}),
       };
     case ConstantsProfile.DOWNLOAD_AVATAR_FAIL:
       return initialState;

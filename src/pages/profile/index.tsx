@@ -11,6 +11,7 @@ import { Panel, ButtonPanel, ContainerFixed, ContainerRow } from '../../componen
 import { ListAppState } from '../../stateManager/listTypes';
 import { uploadAvatar, downloadAvatar } from '../../stateManager/profile/action';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { t } from '../../lang';
 
 const options = {
   title: 'Select Avatar',
@@ -57,10 +58,11 @@ export default function Main(): Element {
         <ContainerRow>
           <ContainerFixed>
             <Text ml={10} textAlign="left" fontSize={20}>
-              Profile
+              {t('Profile')}
             </Text>
             <Text ml={10} mt={10} textAlign="left" fontSize={20}>
-              Profile phone number:
+              {t('Profile phone number')}
+              :
             </Text>
             <Text ml={10} mt={10} textAlign="left" fontSize={20}>
               {phone.phoneNumber}
@@ -76,10 +78,10 @@ export default function Main(): Element {
         </ContainerRow>
         <ButtonPanel>
           <ButtonIcon onPress={handleUploadAvatar}>
-            <Text fontSize={20}>Upload avatar</Text>
+            <Text fontSize={20}>{t('Upload avatar')}</Text>
           </ButtonIcon>
           <ButtonIcon onPress={handleWritePost} ml={10}>
-            <Text fontSize={20}>Write post</Text>
+            <Text fontSize={20}>{t('Write post')}</Text>
           </ButtonIcon>
         </ButtonPanel>
       </Panel>

@@ -1,9 +1,10 @@
 import { ConstantsSystem } from './type';
 import api from '../../api';
 import { AppThunk } from '../thunkType';
-import apiConstants from '../../api/apiConstants';
+import apiConstants from '../../api/constants';
+import { changeLanguage } from '../../lang';
 
-const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> => {
+export const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
     await api.post(apiConstants.ROOT);
     dispatch({
@@ -21,4 +22,12 @@ const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> =>
   }
 };
 
-export default checkConnect;
+export const setLanguage = (language: string): AppThunk => async (dispatch): Promise<void | string> => {
+  changeLanguage(language);
+  dispatch({
+    type: ConstantsSystem.SET_LANGUAGE,
+    payload: {
+      language,
+    },
+  });
+};

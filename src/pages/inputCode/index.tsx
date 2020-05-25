@@ -10,6 +10,7 @@ import Text from '../../components/text';
 import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import schemaCode from './validationSchema';
+import { t } from '../../lang';
 
 export default function Entry(): Element {
   const navigation = useNavigation();
@@ -45,7 +46,7 @@ export default function Entry(): Element {
       {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
         <Container>
           <Text fontSize={40} mb={20}>
-            Entry code
+            {t('Entry code')}
           </Text>
           <Input
             placeholder="Entry code"
@@ -59,7 +60,7 @@ export default function Entry(): Element {
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize={20}>OK</Text>
+            <Text fontSize={20}>{t('OK')}</Text>
           </Button>
         </Container>
       )}
