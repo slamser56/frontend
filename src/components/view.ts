@@ -22,7 +22,7 @@ export const Container = styled.View<ContainerInterface>`
 `;
 
 export const ContainerFixed = styled.View<ContainerInterface>`
-  
+background-color: ${({ backgroundColor }): string => backgroundColor || 'rgba(0,0,0,0)'};
 `;
 
 export const ContainerRow = styled.View<ContainerInterface>`
@@ -31,7 +31,7 @@ flex-direction: row;
 `;
 
 export const ButtonPanel = styled.View`
-  margin-top: 40px;
+  margin-top: 0px;
   width: 100%;
   flex: 1;
   flex-direction: row;

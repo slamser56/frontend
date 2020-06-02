@@ -6,6 +6,7 @@ enum apiConstants {
   VERIFY_TOKEN = '/phone/verifyToken',
   UPLOAD_AVATAR = '/profile/uploadAvatar',
   DOWNLOAD_AVATAR = '/profile/downloadAvatar',
+  GET_PROFILE = '/profile/getProfile',
 }
 
 export default apiConstants;

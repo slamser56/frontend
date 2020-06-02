@@ -2,6 +2,7 @@ import { ConstantsPhone } from './type';
 import api, { autorizeApi } from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
+import { t } from '../../lang';
 
 export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
   try {
@@ -16,15 +17,14 @@ export const verifyCode = (code: string, phoneNumber: number): AppThunk => async
         token,
       },
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
       type: ConstantsPhone.VERIFY_CODE_FAIL,
     });
     if (error.response.status === 404) {
-      return Promise.reject('Input correct code');
+      return Promise.reject(t('action.inputCorrectCode'));
     }
-    return Promise.reject('Something wrong');
+    return Promise.reject(t('action.somethingWrong'));
   }
 };
 
@@ -37,12 +37,11 @@ export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Pro
         phoneNumber,
       },
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
       type: ConstantsPhone.SEND_CODE_FAIL,
     });
-    return Promise.reject('Something wrong');
+    return Promise.reject(t('action.somethingWrong'));
   }
 };
 
@@ -53,12 +52,11 @@ export const checkToken = (token: string): AppThunk => async (dispatch): Promise
     dispatch({
       type: ConstantsPhone.VERIFY_TOKEN_SUCCESS,
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
       type: ConstantsPhone.VERIFY_TOKEN_FAIL,
     });
-    return Promise.reject('Verify token fail');
+    return Promise.reject(t('action.verifyTokenFail'));
   }
 };
 

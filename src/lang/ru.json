@@ -1,0 +1,33 @@
+{
+  "base":{
+    "ok": "OK",
+    "profile": "Профиль",
+    "write": "Написать"
+  },
+  "writePost":{
+    "inputTextForPost": "Введите текст для поста"
+  },
+  "entry":{
+    "entryPhoneNumber": "Введите номер телефона"
+  },
+  "inputCode": {
+    "entryCode": "Введите код"
+  },
+  "profile": {
+    "profilePhoneNumber": "Номер телефона профиля",
+    "uploadAvatar": "Загрузить аватар",
+    "writePost": "Написать пост",
+    "goMain": "Перейти на главную"
+  },
+  "main": {
+    "logOut": "Выйти",
+    "goToRegistration": "Регистрация",
+    "yourPhoneNumber": "Ваш номер телефона"
+  },
+  "action":{
+    "somethingWrong":"Что-то пошло не так",
+    "inputCorrectCode":"Введите корректный код",
+    "verifyTokenFail":"Токен не прошел проверку",
+    "doNotConnect":"Нет соединения"
+  }
+}

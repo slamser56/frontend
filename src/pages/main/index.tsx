@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
-import Toast from 'react-native-simple-toast';
-import lodash from 'lodash';
+import Toast from 'react-native-root-toast';
+import { get } from 'lodash';
 import Text from '../../components/text';
 import { Container } from '../../components/view';
 import { Button } from '../../components/button';
 import { ListAppState } from '../../stateManager/listTypes';
 import { logOut, checkToken } from '../../stateManager/phone/action';
-import { checkConnect, setLanguage } from '../../stateManager/system/action';
+import { checkConnect } from '../../stateManager/system/action';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { t } from '../../lang';
 
@@ -21,20 +21,19 @@ export default function Main(): Element {
   useEffect(() => {
     (async (): Promise<void> => {
       try {
-        await dispatch( setLanguage('en'))
         await dispatch(checkConnect());
         if (phone.token) await dispatch(checkToken(phone.token));
       } catch (error) {
         Toast.show(error);
       }
     })();
-  }, []);
+  }, [phone.token]);
 
   function handleClick(): void {
     navigation.navigate(StackNavigationRoutes.ENTRY);
   }
   function handleClickProfile(): void {
-    navigation.navigate(StackNavigationRoutes.PROFILE);
+    navigation.navigate(StackNavigationRoutes.PROFILE_STACK);
   }
   function handleLogOut(): void {
     try {
@@ -46,23 +45,23 @@ export default function Main(): Element {
 
   return (
     <Container>
-      {lodash.get(phone, 'token', '') ? (
+      {get(phone, 'token', '') ? (
         <>
           <Text>
-            {t('Your phone number')}
+            {t('main.yourPhoneNumber')}
             :
             {phone.phoneNumber}
           </Text>
           <Button mt={10} onPress={handleLogOut}>
-            <Text fontSize={20}>{t('Log out')}</Text>
+            <Text fontSize={20}>{t('main.logOut')}</Text>
           </Button>
           <Button mt={10} onPress={handleClickProfile}>
-            <Text fontSize={20}>{t('Profile')}</Text>
+            <Text fontSize={20}>{t('base.profile')}</Text>
           </Button>
         </>
       ) : (
         <Button onPress={handleClick}>
-          <Text fontSize={20}>{t('Go to Registration')}</Text>
+          <Text fontSize={20}>{t('main.goToRegistration')}</Text>
         </Button>
       )}
     </Container>

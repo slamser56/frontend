@@ -1,0 +1,33 @@
+{
+  "base":{
+    "ok": "OK",
+    "profile": "Profile",
+    "write": "Write"
+  },
+  "writePost":{
+    "inputTextForPost": "Input text for post"
+  },
+  "entry":{
+    "entryPhoneNumber": "Entry phone number"
+  },
+  "inputCode": {
+    "entryCode": "Entry code"
+  },
+  "profile": {
+    "profilePhoneNumber": "Profile phone number",
+    "uploadAvatar": "Upload avatar",
+    "writePost": "Write post",
+    "goMain": "Go main"
+  },
+  "main": {
+    "logOut": "Log out",
+    "goToRegistration": "Go to Registration",
+    "yourPhoneNumber": "Your phone number"
+  },
+  "action":{
+    "somethingWrong":"Something wrong",
+    "inputCorrectCode":"Input correct code",
+    "verifyTokenFail":"Verify token fail",
+    "doNotConnect":"Do not connect"
+  }
+}

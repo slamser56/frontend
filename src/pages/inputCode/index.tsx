@@ -15,7 +15,7 @@ import { t } from '../../lang';
 export default function Entry(): Element {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const phone = useSelector((state: ListAppState) => state.phone);
+  const { phoneNumber } = useSelector((state: ListAppState) => state.phone);
 
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState(false);
@@ -30,7 +30,7 @@ export default function Entry(): Element {
 
   async function handleClick(code: string): Promise<void> {
     try {
-      await dispatch(verifyCode(code, phone.phoneNumber));
+      await dispatch(verifyCode(code, phoneNumber));
       setStatus(true);
     } catch (error) {
       setMessage(error);
@@ -43,13 +43,13 @@ export default function Entry(): Element {
       onSubmit={(values): Promise<void> => handleClick(values.code)}
       validationSchema={schemaCode}
     >
-      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
+      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): Element => (
         <Container>
           <Text fontSize={40} mb={20}>
-            {t('Entry code')}
+            {t('inputCode.entryCode')}
           </Text>
           <Input
-            placeholder="Entry code"
+            placeholder={t('inputCode.entryCode')}
             onChangeText={handleChange('code')}
             onBlur={handleBlur('code')}
             value={values.code}
@@ -60,7 +60,7 @@ export default function Entry(): Element {
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize={20}>{t('OK')}</Text>
+            <Text fontSize={20}>{t('base.ok')}</Text>
           </Button>
         </Container>
       )}

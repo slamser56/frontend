@@ -2,6 +2,7 @@ import { AppThunk } from '../thunkType';
 import { ConstantsProfile } from './type';
 import api from '../../api';
 import apiConstants from '../../api/constants';
+import { t } from '../../lang';
 
 export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {
@@ -14,29 +15,27 @@ export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promi
         avatar,
       },
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
       type: ConstantsProfile.UPLOAD_AVATAR_FAIL,
     });
-    return Promise.reject('Something wrong');
+    return Promise.reject(t('action.somethingWrong'));
   }
 };
 
-export const downloadAvatar = (): AppThunk => async (dispatch): Promise<void | string> => {
+export const getProfile = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar } = await api.post(apiConstants.DOWNLOAD_AVATAR);
+    const { avatar } = await api.post(apiConstants.GET_PROFILE);
     dispatch({
-      type: ConstantsProfile.DOWNLOAD_AVATAR_SUCCESS,
+      type: ConstantsProfile.GET_PROFILE_SUCCESS,
       payload: {
         avatar,
       },
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
-      type: ConstantsProfile.DOWNLOAD_AVATAR_FAIL,
+      type: ConstantsProfile.GET_PROFILE_FAIL,
     });
-    return Promise.reject('Something wrong');
+    return Promise.reject(t('action.somethingWrong'));
   }
 };

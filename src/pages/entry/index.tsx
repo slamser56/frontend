@@ -41,13 +41,13 @@ export default function Entry(): Element {
       onSubmit={(values): Promise<void> => handleClick(values.phoneNumber)}
       validationSchema={schemaPhoneNumber}
     >
-      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }) => (
+      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): Element => (
         <Container>
           <Text fontSize={40} mb={20}>
-            {t('Entry phone number')}
+            {t('entry.entryPhoneNumber')}
           </Text>
           <Input
-            placeholder="Entry phone number"
+            placeholder={t('entry.entryPhoneNumber')}
             onChangeText={handleChange('phoneNumber')}
             onBlur={handleBlur('phoneNumber')}
             value={values.phoneNumber}
@@ -59,7 +59,7 @@ export default function Entry(): Element {
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>
-            <Text fontSize={20}>{t('OK')}</Text>
+            <Text fontSize={20}>{t('base.ok')}</Text>
           </Button>
         </Container>
       )}

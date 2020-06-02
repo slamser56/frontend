@@ -2,7 +2,7 @@ import { ConstantsSystem } from './type';
 import api from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
-import { changeLanguage } from '../../lang';
+import { changeLanguage, t } from '../../lang';
 
 export const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
@@ -13,12 +13,11 @@ export const checkConnect = (): AppThunk => async (dispatch): Promise<void | str
         connected: true,
       },
     });
-    return Promise.resolve();
   } catch (error) {
     dispatch({
       type: ConstantsSystem.CONNECT_FAIL,
     });
-    return Promise.reject('Do not connect');
+    return Promise.reject(t('action.doNotConnect'));
   }
 };
 

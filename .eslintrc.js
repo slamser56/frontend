@@ -17,6 +17,7 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
+    'consistent-return': 'off',
     'global-require': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/jsx-filename-extension': [1, { 'extensions': ['.tsx', '.ts'] }],

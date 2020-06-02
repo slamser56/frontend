@@ -16,7 +16,7 @@ export default function WritePost(): Element {
     <Container>
       <ContainerScroll>
         <Text mt={20} textAlign="left">
-          {t('Input text for post')}
+          {t('writePost.inputTextForPost')}
         </Text>
         <InputNewPost
           multiline
@@ -25,7 +25,7 @@ export default function WritePost(): Element {
           value={text}
         />
         <Button mt={20}>
-          <Text>{t('Write')}</Text>
+          <Text>{t('base.write')}</Text>
         </Button>
       </ContainerScroll>
     </Container>
