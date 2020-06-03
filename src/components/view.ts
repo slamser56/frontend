@@ -8,7 +8,7 @@ export const Panel = styled.View`
   width: 100%;
   height: 200px;
   background-color: rgb(244, 244, 244);
-  shadow-color: #000;
+  shadow-color: rgba(0, 0, 0, 1);
   shadow-opacity: 0.43;
   shadow-radius: 9.51px;
   elevation: 15;
@@ -16,18 +16,18 @@ export const Panel = styled.View`
 
 export const Container = styled.View<ContainerInterface>`
   flex: 1;
-  background-color: ${({ backgroundColor }): string => backgroundColor || '#fff'};
+  background-color: ${({ backgroundColor }): string => backgroundColor || 'rgba(0, 0, 0, 1)'};
   justify-content: center;
   align-items: center;
 `;
 
 export const ContainerFixed = styled.View<ContainerInterface>`
-background-color: ${({ backgroundColor }): string => backgroundColor || 'rgba(0,0,0,0)'};
+  background-color: ${({ backgroundColor }): string => backgroundColor || 'rgba(0,0,0,0)'};
 `;
 
 export const ContainerRow = styled.View<ContainerInterface>`
-justify-content: space-between;
-flex-direction: row;
+  justify-content: space-between;
+  flex-direction: row;
 `;
 
 export const ButtonPanel = styled.View`
@@ -39,6 +39,6 @@ export const ButtonPanel = styled.View`
 
 export const ContainerScroll = styled.ScrollView<ContainerInterface>`
   flex: 1;
-  background-color: ${({ backgroundColor }): string => backgroundColor || '#fff'};
+  background-color: ${({ backgroundColor }): string => backgroundColor || 'rgba(0, 0, 0, 1)'};
   width: 90%;
 `;

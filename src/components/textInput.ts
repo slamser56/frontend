@@ -5,13 +5,13 @@ interface TextInputInterface {
   mt?: number;
 }
 
-export const Input = styled.TextInput`
-  background: #c2c2c2;
+export const Input = styled.TextInput<TextInputInterface>`
+  background: rgba(194, 194, 194, 1);
   border-radius: 10px;
   font-size: 25px;
   height: 50px;
   width: 200px;
-  margin-bottom: 20px;
+  margin-bottom: ${({ mb }): number => mb || 0}px;
 `;
 
 export const InputNewPost = styled.TextInput<TextInputInterface>`

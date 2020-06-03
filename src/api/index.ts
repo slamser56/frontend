@@ -24,7 +24,7 @@ api.interceptors.response.use(
   (error: string) => Promise.reject(error),
 );
 
-export const autorizeApi = (token?: string):void => {
+export const autorizeApi = (token?: string): void => {
   api.defaults.headers.Authorization = token ? `Bearer ${token}` : null;
 };
 

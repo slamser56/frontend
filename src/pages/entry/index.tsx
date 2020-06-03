@@ -47,6 +47,7 @@ export default function Entry(): Element {
             {t('entry.entryPhoneNumber')}
           </Text>
           <Input
+            mb={20}
             placeholder={t('entry.entryPhoneNumber')}
             onChangeText={handleChange('phoneNumber')}
             onBlur={handleBlur('phoneNumber')}

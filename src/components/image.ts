@@ -11,12 +11,11 @@ const Avatar = styled.Image<ImageInterface>`
   width: 100px;
   height: 100px;
   border-radius: 50px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 1);
   margin-top: ${({ mt }): number => mt || 0}px;
   margin-left: ${({ ml }): number => ml || 0}px;
   margin-right: ${({ mr }): number => mr || 0}px;
   margin-bottom: ${({ mb }): number => mb || 0}px;
-  
 `;
 
 export default Avatar;

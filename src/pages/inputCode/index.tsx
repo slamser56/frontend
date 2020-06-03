@@ -49,6 +49,7 @@ export default function Entry(): Element {
             {t('inputCode.entryCode')}
           </Text>
           <Input
+            mb={20}
             placeholder={t('inputCode.entryCode')}
             onChangeText={handleChange('code')}
             onBlur={handleBlur('code')}

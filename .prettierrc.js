@@ -8,7 +8,7 @@ module.exports = {
       "plugin:react/recommended",
       "plugin:@typescript-eslint/recommended"
      ],
-    jsxBracketSameLine: true,
+    jsxBracketSameLine: false,
     singleQuote: true,
     trailingComma: 'all',
     semi: true,
