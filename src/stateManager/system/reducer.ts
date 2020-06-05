@@ -14,7 +14,10 @@ function system(state = initialState, action: SystemActionTypes): SystemState {
         ...(action.payload || {}),
       };
     case ConstantsSystem.CONNECT_FAIL:
-      return initialState;
+      return {
+        ...state,
+        connected: false,
+      };
     default:
       return { ...state };
   }

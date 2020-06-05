@@ -1,5 +1,6 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import { verifyCode } from '../../stateManager/phone/thunkAction';
@@ -11,38 +12,29 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import schemaCode from './validationSchema';
 import { t } from '../../lang';
-import { resetErrorMessage } from '../../stateManager/phone/action';
 
 export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { phone } = useSelector((state: ListAppState) => state);
 
-  const [status, setStatus] = useState(false);
-
   useEffect(() => {
-    const reset = navigation.addListener('focus', () => {
-      dispatch(resetErrorMessage());
-    });
-    return reset;
-  }, [navigation]);
-
-  useEffect(() => {
-    if (status) {
-      setStatus(false);
+    if (phone.response) {
       navigation.navigate(StackNavigationRoutes.HOME);
     }
-  }, [navigation, status]);
+  }, [phone.response]);
 
   async function handleClick(code: string): Promise<void> {
-    try {
-      await dispatch(verifyCode(code, phone.phoneNumber));
-      setStatus(true);
-    } catch (error) {
-      setStatus(false);
-    }
+    dispatch(verifyCode(code, phone.phoneNumber));
   }
 
+  if (phone.isFetching) {
+    return (
+      <Container>
+        <ActivityIndicator size="large" />
+      </Container>
+    );
+  }
   return (
     <Formik
       initialValues={{ code: '' }}
@@ -61,9 +53,9 @@ export default function Entry(): ReactElement {
             onBlur={handleBlur('code')}
             value={values.code}
           />
-          {(touched.code && errors.code) || phone.errorMessage ? (
+          {(touched.code && errors.code) || phone.error ? (
             <Text fontSize={20} color="red">
-              {errors.code || t(phone.errorMessage)}
+              {errors.code || t(phone.error)}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

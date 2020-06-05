@@ -31,7 +31,6 @@ export default function Main(): ReactElement {
   function handleLogOut(): void {
     dispatch(logOut());
   }
-
   return (
     <Container>
       {phone.token ? (

@@ -1,10 +1,16 @@
 import { ConstantsPhone } from './type';
 
-export function verifyCodeFail(errorMessage: string) {
+export function verifyCodeRequest() {
+  return {
+    type: ConstantsPhone.VERIFY_CODE_REQUEST,
+  };
+}
+
+export function verifyCodeFail(error: string) {
   return {
     type: ConstantsPhone.VERIFY_CODE_FAIL,
     payload: {
-      errorMessage,
+      error,
     },
   };
 }
@@ -14,8 +20,13 @@ export function verifyCodeSuccess(token: string) {
     type: ConstantsPhone.VERIFY_CODE_SUCCESS,
     payload: {
       token,
-      errorMessage: '',
     },
+  };
+}
+
+export function sendCodeRequest() {
+  return {
+    type: ConstantsPhone.SEND_CODE_REQUEST,
   };
 }
 
@@ -24,17 +35,22 @@ export function sendCodeSuccess(phoneNumber: number) {
     type: ConstantsPhone.SEND_CODE_SUCCESS,
     payload: {
       phoneNumber,
-      errorMessage: '',
     },
   };
 }
 
-export function sendCodeFail(errorMessage: string) {
+export function sendCodeFail(error: string) {
   return {
     type: ConstantsPhone.SEND_CODE_FAIL,
     payload: {
-      errorMessage,
+      error,
     },
+  };
+}
+
+export function verifyTokenRequest() {
+  return {
+    type: ConstantsPhone.VERIFY_TOKEN_REQUEST,
   };
 }
 
@@ -56,11 +72,8 @@ export function logOutAction() {
   };
 }
 
-export function resetErrorMessage() {
+export function resetAction() {
   return {
-    type: ConstantsPhone.RESET_ERROR_MESSAGE,
-    payload: {
-      errorMessage: '',
-    },
+    type: ConstantsPhone.RESET,
   };
 }

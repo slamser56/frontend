@@ -3,55 +3,48 @@ import api, { autorizedApi } from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
 import { t } from '../../lang';
-import {
-  verifyCodeFail,
-  verifyCodeSuccess,
-  sendCodeSuccess,
-  sendCodeFail,
-  verifyTokenFail,
-  verifyTokenSuccess,
-  logOutAction,
-} from './action';
+import * as action from './action';
 
 export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
   try {
+    dispatch(action.verifyCodeRequest());
     const { token } = await api.post(apiConstants.VERIFY_CODE, {
       phoneNumber,
       code,
     });
     autorizedApi(token);
-    dispatch(verifyCodeSuccess(token));
+    dispatch(action.verifyCodeSuccess(token));
   } catch (error) {
     if (error.response.status === 404) {
-      dispatch(verifyCodeFail('action.inputCorrectCode'));
+      dispatch(action.verifyCodeFail('action.inputCorrectCode'));
     }
-    dispatch(verifyCodeFail('action.somethingWrong'));
-    return Promise.reject();
+    dispatch(action.verifyCodeFail('action.somethingWrong'));
   }
 };
 
 export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
   try {
+    dispatch(action.sendCodeRequest());
     await api.post(apiConstants.SEND_CODE, { phoneNumber });
-    dispatch(sendCodeSuccess(phoneNumber));
+    dispatch(action.sendCodeSuccess(phoneNumber));
   } catch (error) {
-    dispatch(sendCodeFail('action.somethingWrong'));
-    return Promise.reject();
+    dispatch(action.sendCodeFail('action.somethingWrong'));
   }
 };
 
 export const checkToken = (token: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {
+    dispatch(action.verifyCodeRequest());
     await api.post(apiConstants.VERIFY_TOKEN, { token });
     autorizedApi(token);
-    dispatch(verifyTokenSuccess());
+    dispatch(action.verifyTokenSuccess());
   } catch (error) {
-    dispatch(verifyTokenFail());
+    dispatch(action.verifyTokenFail());
     Toast.show(t('action.verifyTokenFail'));
   }
 };
 
 export const logOut = (): AppThunk => (dispatch): void => {
   autorizedApi('');
-  dispatch(logOutAction());
+  dispatch(action.logOutAction());
 };
