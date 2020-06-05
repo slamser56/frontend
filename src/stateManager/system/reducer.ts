@@ -2,7 +2,7 @@ import { SystemState, SystemActionTypes, ConstantsSystem } from './type';
 
 const initialState: SystemState = {
   language: 'en',
-  connected: false,
+  connected: true,
 };
 
 function system(state = initialState, action: SystemActionTypes): SystemState {

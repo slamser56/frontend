@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import constantColors from './constantColors';
 
 interface TextInputInterface {
   mb?: number;
@@ -6,7 +7,7 @@ interface TextInputInterface {
 }
 
 export const Input = styled.TextInput<TextInputInterface>`
-  background: rgba(194, 194, 194, 1);
+  background: ${constantColors.gray};
   border-radius: 10px;
   font-size: 25px;
   height: 50px;
@@ -15,7 +16,7 @@ export const Input = styled.TextInput<TextInputInterface>`
 `;
 
 export const InputNewPost = styled.TextInput<TextInputInterface>`
-  background: rgba(0, 0, 0, 0.1);
+  background: ${constantColors.whiteGray};
   width: 100%;
   min-height: 100px;
   margin-top: ${({ mt }): number => mt || 0}px;

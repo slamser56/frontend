@@ -1,28 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import { verifyCode } from '../../stateManager/phone/action';
+import { verifyCode } from '../../stateManager/phone/thunkAction';
 import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { Input } from '../../components/textInput';
 import Text from '../../components/text';
 import { Container } from '../../components/view';
-import { Button } from '../../components/button';
+import Button from '../../components/button';
 import schemaCode from './validationSchema';
 import { t } from '../../lang';
+import { resetErrorMessage } from '../../stateManager/phone/action';
 
-export default function Entry(): Element {
+export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { phoneNumber } = useSelector((state: ListAppState) => state.phone);
+  const { phone } = useSelector((state: ListAppState) => state);
 
-  const [message, setMessage] = useState('');
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
+    const reset = navigation.addListener('focus', () => {
+      dispatch(resetErrorMessage());
+    });
+    return reset;
+  }, [navigation]);
+
+  useEffect(() => {
     if (status) {
-      setMessage('');
       setStatus(false);
       navigation.navigate(StackNavigationRoutes.HOME);
     }
@@ -30,10 +36,10 @@ export default function Entry(): Element {
 
   async function handleClick(code: string): Promise<void> {
     try {
-      await dispatch(verifyCode(code, phoneNumber));
+      await dispatch(verifyCode(code, phone.phoneNumber));
       setStatus(true);
     } catch (error) {
-      setMessage(error);
+      setStatus(false);
     }
   }
 
@@ -55,9 +61,9 @@ export default function Entry(): Element {
             onBlur={handleBlur('code')}
             value={values.code}
           />
-          {(touched.code && errors.code) || message ? (
+          {(touched.code && errors.code) || phone.errorMessage ? (
             <Text fontSize={20} color="red">
-              {errors.code || message}
+              {errors.code || t(phone.errorMessage)}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

@@ -1,26 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { sendCode } from '../../stateManager/phone/action';
+import { sendCode } from '../../stateManager/phone/thunkAction';
 import Text from '../../components/text';
+import { ListAppState } from '../../stateManager/listTypes';
 import { Container } from '../../components/view';
-import { Button } from '../../components/button';
+import Button from '../../components/button';
 import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 import { t } from '../../lang';
+import { resetErrorMessage } from '../../stateManager/phone/action';
 
-export default function Entry(): Element {
+export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [message, setMessage] = useState('');
   const [status, setStatus] = useState(false);
+  const { phone } = useSelector((state: ListAppState) => state);
+
+  useEffect(() => {
+    const reset = navigation.addListener('focus', () => {
+      dispatch(resetErrorMessage());
+    });
+    return reset;
+  }, [navigation]);
 
   useEffect(() => {
     if (status) {
-      setMessage('');
       setStatus(false);
       navigation.navigate(StackNavigationRoutes.INPUT_CODE);
     }
@@ -31,7 +39,7 @@ export default function Entry(): Element {
       await dispatch(sendCode(Number(phoneNumber)));
       setStatus(true);
     } catch (error) {
-      setMessage(error);
+      setStatus(false);
     }
   }
 
@@ -53,10 +61,9 @@ export default function Entry(): Element {
             onBlur={handleBlur('phoneNumber')}
             value={values.phoneNumber}
           />
-          {(touched.phoneNumber && errors.phoneNumber) || message ? (
+          {(touched.phoneNumber && errors.phoneNumber) || phone.errorMessage ? (
             <Text fontSize={20} color="red">
-              {errors.phoneNumber}
-              {message}
+              {errors.phoneNumber || t(phone.errorMessage)}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

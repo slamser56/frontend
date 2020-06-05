@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import apiConstants from './constants';
+import { API_ADDRESS } from 'react-native-dotenv';
 
 const api = axios.create({
-  baseURL: apiConstants.ADDRESS,
+  baseURL: API_ADDRESS,
   timeout: 15000,
   headers: {
     Accept: 'application/json',
@@ -16,6 +16,7 @@ api.interceptors.response.use(
     const { status, data } = response;
     switch (status) {
       case 200:
+      case 201:
         return Promise.resolve(data);
       default:
         return Promise.reject();
@@ -24,7 +25,7 @@ api.interceptors.response.use(
   (error: string) => Promise.reject(error),
 );
 
-export const autorizeApi = (token?: string): void => {
+export const autorizedApi = (token: string): void => {
   api.defaults.headers.Authorization = token ? `Bearer ${token}` : null;
 };
 

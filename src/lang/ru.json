@@ -29,5 +29,10 @@
     "inputCorrectCode":"Введите корректный код",
     "verifyTokenFail":"Токен не прошел проверку",
     "doNotConnect":"Нет соединения"
+  },
+  "validation":{
+    "inputValidPhoneNumber":"Введите валидный номер телефона",
+    "phoneNumberIsNotValid":"Номер телефона не валидный",
+    "inputCorrectCode":"Введите корректный код"
   }
 }

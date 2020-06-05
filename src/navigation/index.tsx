@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import StackNavigationRoutes from './StackNavigationRoutes';
@@ -7,7 +7,7 @@ import mainStack from './main';
 
 const RootStack = createStackNavigator();
 
-export default function Navigation(): Element {
+export default function Navigation(): ReactElement {
   return (
     <NavigationContainer>
       <RootStack.Navigator>

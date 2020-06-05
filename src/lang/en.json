@@ -29,5 +29,10 @@
     "inputCorrectCode":"Input correct code",
     "verifyTokenFail":"Verify token fail",
     "doNotConnect":"Do not connect"
+  },
+  "validation":{
+    "inputValidPhoneNumber":"Input valid phone number",
+    "phoneNumberIsNotValid":"Phone number is not valid",
+    "inputCorrectCode":"Input correct code"
   }
 }

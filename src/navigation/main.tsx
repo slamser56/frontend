@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import StackNavigationRoutes from './StackNavigationRoutes';
 import main from '../pages/main';
@@ -7,7 +7,7 @@ import inputCode from '../pages/inputCode';
 
 const MainStack = createStackNavigator();
 
-export default function Navigation(): Element {
+export default function Navigation(): ReactElement {
   return (
     <MainStack.Navigator>
       <MainStack.Screen name={StackNavigationRoutes.HOME} component={main} />

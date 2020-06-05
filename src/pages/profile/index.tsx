@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
-import Toast from 'react-native-root-toast';
 import { get } from 'lodash';
 import Text from '../../components/text';
-import { ButtonIcon } from '../../components/button';
+import Button from '../../components/button';
 import Avatar from '../../components/image';
 import { Panel, ButtonPanel, ContainerFixed, ContainerRow } from '../../components/view';
 import { ListAppState } from '../../stateManager/listTypes';
-import { uploadAvatar, getProfile } from '../../stateManager/profile/action';
+import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { t } from '../../lang';
+
+const image = require('../../image/avatar.png');
 
 const options = {
   title: 'Select Avatar',
@@ -21,29 +22,21 @@ const options = {
   },
 };
 
-export default function Main(): Element {
+export default function Main(): ReactElement {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { phone, profile } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
     (async (): Promise<void> => {
-      try {
-        await dispatch(getProfile());
-      } catch (error) {
-        Toast.show(error);
-      }
+      dispatch(getProfile());
     })();
   }, [profile.avatar]);
 
   async function handleUploadAvatar(): Promise<void> {
     ImagePicker.launchImageLibrary(options, async response => {
-      try {
-        if (!response.didCancel) {
-          await dispatch(uploadAvatar(response.data));
-        }
-      } catch (error) {
-        Toast.show(error);
+      if (!response.didCancel) {
+        dispatch(uploadAvatar(response.data));
       }
     });
   }
@@ -65,8 +58,7 @@ export default function Main(): Element {
               {t('base.profile')}
             </Text>
             <Text ml={10} mt={10} textAlign="left" fontSize={20}>
-              {t('profile.profilePhoneNumber')}
-              :
+              {`${t('profile.profilePhoneNumber')}:`}
             </Text>
             <Text ml={10} mt={10} textAlign="left" fontSize={20}>
               {phone.phoneNumber}
@@ -76,21 +68,21 @@ export default function Main(): Element {
             <Avatar
               mt={10}
               mr={10}
-              source={get(profile, 'avatar') ? { uri: profile.avatar } : require('../../image/avatar.png')}
+              source={get(profile, 'avatar') ? { uri: profile.avatar } : image}
             />
           </ContainerFixed>
         </ContainerRow>
         <ButtonPanel>
-          <ButtonIcon onPress={handleUploadAvatar}>
+          <Button width={170} height={40} onPress={handleUploadAvatar}>
             <Text fontSize={20}>{t('profile.uploadAvatar')}</Text>
-          </ButtonIcon>
-          <ButtonIcon onPress={handleWritePost} ml={10}>
+          </Button>
+          <Button width={170} height={40} onPress={handleWritePost} ml={10}>
             <Text fontSize={20}>{t('profile.writePost')}</Text>
-          </ButtonIcon>
+          </Button>
         </ButtonPanel>
-        <ButtonIcon onPress={handleGoMain} mt={10}>
+        <Button width={170} height={40} onPress={handleGoMain} mt={10}>
           <Text fontSize={20}>{t('profile.goMain')}</Text>
-        </ButtonIcon>
+        </Button>
       </Panel>
     </ContainerFixed>
   );

@@ -10,12 +10,11 @@ const initialState: PostState = {
 export default function post(state = initialState, action: PostActionTypes): PostState {
   switch (action.type) {
     case ConstantsPost.UPLOAD_POST_SUCCESS:
+    case ConstantsPost.UPLOAD_POST_FAIL:
       return {
         ...state,
         ...(action.payload || {}),
       };
-    case ConstantsPost.UPLOAD_POST_FAIL:
-      return initialState;
     default:
       return { ...state };
   }
