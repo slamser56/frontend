@@ -28,7 +28,7 @@ export default function Main(): ReactElement {
   const { phone, profile } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    (async (): Promise<void> => {
+    ((): void => {
       dispatch(getProfile());
     })();
   }, [profile.avatar]);
@@ -41,7 +41,7 @@ export default function Main(): ReactElement {
     });
   }
 
-  async function handleWritePost(): Promise<void> {
+  function handleWritePost(): void {
     navigation.navigate(StackNavigationRoutes.WRITE_POST);
   }
 
@@ -65,11 +65,7 @@ export default function Main(): ReactElement {
             </Text>
           </ContainerFixed>
           <ContainerFixed>
-            <Avatar
-              mt={10}
-              mr={10}
-              source={get(profile, 'avatar') ? { uri: profile.avatar } : image}
-            />
+            <Avatar mt={10} mr={10} source={get(profile, 'avatar') ? { uri: profile.avatar } : image} />
           </ContainerFixed>
         </ContainerRow>
         <ButtonPanel>

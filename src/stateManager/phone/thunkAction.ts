@@ -5,7 +5,7 @@ import apiConstants from '../../api/constants';
 import { t } from '../../lang';
 import * as action from './action';
 
-export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
+export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.verifyCodeRequest());
     const { token } = await api.post(apiConstants.VERIFY_CODE, {
@@ -22,7 +22,7 @@ export const verifyCode = (code: string, phoneNumber: number): AppThunk => async
   }
 };
 
-export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Promise<void | string> => {
+export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.sendCodeRequest());
     await api.post(apiConstants.SEND_CODE, { phoneNumber });
@@ -32,7 +32,7 @@ export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Pro
   }
 };
 
-export const checkToken = (token: string): AppThunk => async (dispatch): Promise<void | string> => {
+export const checkToken = (token: string): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.verifyCodeRequest());
     await api.post(apiConstants.VERIFY_TOKEN, { token });

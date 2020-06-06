@@ -1,4 +1,4 @@
-import React, { useEffect, ReactElement } from 'react';
+import React, { useEffect, ReactElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -12,19 +12,26 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import schemaCode from './validationSchema';
 import { t } from '../../lang';
+import { resetAction } from '../../stateManager/phone/action';
 
 export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { phone } = useSelector((state: ListAppState) => state);
-
+  const [didMount, setDidMount] = useState(false);
+  
   useEffect(() => {
-    if (phone.response) {
-      navigation.navigate(StackNavigationRoutes.HOME);
+    if (didMount) {
+      if (phone.response) {
+        navigation.navigate(StackNavigationRoutes.HOME);
+      }
+    } else {
+      dispatch(resetAction());
+      setDidMount(true);
     }
   }, [phone.response]);
 
-  async function handleClick(code: string): Promise<void> {
+  function handleClick(code: string): void {
     dispatch(verifyCode(code, phone.phoneNumber));
   }
 
@@ -38,10 +45,10 @@ export default function Entry(): ReactElement {
   return (
     <Formik
       initialValues={{ code: '' }}
-      onSubmit={(values): Promise<void> => handleClick(values.code)}
+      onSubmit={(values): void => handleClick(values.code)}
       validationSchema={schemaCode}
     >
-      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): Element => (
+      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): ReactElement => (
         <Container>
           <Text fontSize={40} mb={20}>
             {t('inputCode.entryCode')}

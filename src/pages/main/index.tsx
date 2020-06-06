@@ -16,7 +16,7 @@ export default function Main(): ReactElement {
   const { phone } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    (async (): Promise<void> => {
+    ((): void => {
       dispatch(checkConnect());
       if (phone.token) dispatch(checkToken(phone.token));
     })();

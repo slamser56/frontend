@@ -29,7 +29,6 @@ export default function Entry(): ReactElement {
 
   useEffect(() => {
     if (phone.response) {
-      dispatch(resetAction());
       navigation.navigate(StackNavigationRoutes.INPUT_CODE);
     }
   }, [phone.response]);
@@ -37,6 +36,7 @@ export default function Entry(): ReactElement {
   function handleClick(phoneNumber: string): void {
     dispatch(sendCode(Number(phoneNumber)));
   }
+  
   if (phone.isFetching) {
     return (
       <Container>

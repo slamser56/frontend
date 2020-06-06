@@ -17,6 +17,7 @@ export const Panel = styled.View`
 
 export const Container = styled.View<ContainerInterface>`
   flex: 1;
+  flex-direction: column;
   background-color: ${({ backgroundColor }): string => backgroundColor || constantColors.transparent};
   justify-content: center;
   align-items: center;
