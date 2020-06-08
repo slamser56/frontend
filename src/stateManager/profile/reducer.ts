@@ -2,6 +2,7 @@ import { ProfileState, ProfileActionTypes, ConstantsProfile } from './type';
 
 const initialState: ProfileState = {
   avatar: '',
+  phoneNumber: '',
 };
 
 export default function profile(state = initialState, action: ProfileActionTypes): ProfileState {

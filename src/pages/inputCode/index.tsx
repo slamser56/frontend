@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import { verifyCode } from '../../stateManager/phone/thunkAction';
 import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { Input } from '../../components/textInput';
@@ -12,28 +11,29 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import schemaCode from './validationSchema';
 import { t } from '../../lang';
-import { resetAction } from '../../stateManager/phone/action';
+import { verifyCodeReset } from '../../stateManager/verifyCode/action';
+import verifyCodeAction from '../../stateManager/verifyCode/thunkAction';
 
 export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { phone } = useSelector((state: ListAppState) => state);
+  const { verifyCode, user } = useSelector((state: ListAppState) => state);
   const [didMount, setDidMount] = useState(false);
-  
+
   useEffect(() => {
-    if (didMount && phone.response) {
-        navigation.navigate(StackNavigationRoutes.HOME);
+    if (didMount && verifyCode.response) {
+      navigation.navigate(StackNavigationRoutes.HOME);
     } else {
-      dispatch(resetAction());
+      dispatch(verifyCodeReset());
       setDidMount(true);
     }
-  }, [phone.response]);
+  }, [verifyCode.response]);
 
   function handleClick(code: string): void {
-    dispatch(verifyCode(code, phone.phoneNumber));
+    dispatch(verifyCodeAction(code, user.phoneNumber));
   }
 
-  if (phone.isFetching) {
+  if (verifyCode.isFetching) {
     return (
       <Container>
         <ActivityIndicator size="large" />
@@ -58,9 +58,9 @@ export default function Entry(): ReactElement {
             onBlur={handleBlur('code')}
             value={values.code}
           />
-          {(touched.code && errors.code) || phone.error ? (
+          {(touched.code && errors.code) || verifyCode.error ? (
             <Text fontSize={20} color="red">
-              {errors.code || t(phone.error)}
+              {errors.code || t(verifyCode.error)}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

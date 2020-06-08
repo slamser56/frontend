@@ -4,20 +4,24 @@ import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ListAppState } from '../listTypes';
-import phone from '../phone/reducer';
+import user from '../user/reducer';
 import system from '../system/reducer';
 import profile from '../profile/reducer';
+import sendCode from '../sendCode/reducer';
+import verifyCode from '../verifyCode/reducer';
 
 const persistConfig = {
-  key: 'phone',
+  key: 'user',
   storage: AsyncStorage,
-  whitelist: ['phone'],
+  whitelist: ['user'],
 };
 
 const rootReducer = combineReducers<ListAppState>({
-  phone,
+  user,
   system,
   profile,
+  sendCode,
+  verifyCode,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -25,7 +25,7 @@ const options = {
 export default function Main(): ReactElement {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { phone, profile } = useSelector((state: ListAppState) => state);
+  const { profile } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
       dispatch(getProfile());
@@ -59,7 +59,7 @@ export default function Main(): ReactElement {
               {`${t('profile.profilePhoneNumber')}:`}
             </Text>
             <Text ml={10} mt={10} textAlign="left" fontSize={20}>
-              {phone.phoneNumber}
+              {profile.phoneNumber}
             </Text>
           </ContainerFixed>
           <ContainerFixed>

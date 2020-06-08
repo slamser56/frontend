@@ -19,8 +19,8 @@ export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promi
 
 export const getProfile = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar } = await api.post(apiConstants.GET_PROFILE);
-    dispatch(getProfileSuccess(avatar));
+    const { avatar, phoneNumber } = await api.post(apiConstants.GET_PROFILE);
+    dispatch(getProfileSuccess(avatar, phoneNumber));
   } catch (error) {
     dispatch(getProfileFail());
     Toast.show(t('action.somethingWrong'));

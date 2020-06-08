@@ -1,5 +1,6 @@
 export interface ProfileState {
   avatar: string;
+  phoneNumber: string;
 }
 
 export enum ConstantsProfile {

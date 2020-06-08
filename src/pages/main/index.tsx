@@ -5,7 +5,7 @@ import Text from '../../components/text';
 import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { ListAppState } from '../../stateManager/listTypes';
-import { logOut, checkToken } from '../../stateManager/phone/thunkAction';
+import { logOut, checkToken } from '../../stateManager/user/thunkAction';
 import { checkConnect } from '../../stateManager/system/thunkAction';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { t } from '../../lang';
@@ -13,14 +13,14 @@ import { t } from '../../lang';
 export default function Main(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { phone } = useSelector((state: ListAppState) => state);
+  const { user } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
     ((): void => {
       dispatch(checkConnect());
-      if (phone.token) dispatch(checkToken(phone.token));
+      if (user.token) dispatch(checkToken(user.token));
     })();
-  }, [phone.token]);
+  }, [user.token]);
 
   function handleClick(): void {
     navigation.navigate(StackNavigationRoutes.ENTRY);
@@ -33,9 +33,9 @@ export default function Main(): ReactElement {
   }
   return (
     <Container>
-      {phone.token ? (
+      {user.token ? (
         <>
-          <Text>{`${t('main.yourPhoneNumber')} : ${phone.phoneNumber}`}</Text>
+          <Text>{`${t('main.yourPhoneNumber')} : ${user.phoneNumber}`}</Text>
           <Button mt={10} onPress={handleLogOut}>
             <Text fontSize={20}>{t('main.logOut')}</Text>
           </Button>

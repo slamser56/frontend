@@ -1,9 +1,10 @@
-import React, { useEffect, ReactElement } from 'react';
+import React, { useEffect, ReactElement, useState } from 'react';
 import { Formik } from 'formik';
 import { ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { sendCode } from '../../stateManager/phone/thunkAction';
+import sendCodeAction from '../../stateManager/sendCode/thunkAction';
+import { sendCodeReset } from '../../stateManager/sendCode/action';
 import Text from '../../components/text';
 import { ListAppState } from '../../stateManager/listTypes';
 import { Container } from '../../components/view';
@@ -12,32 +13,28 @@ import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 import { t } from '../../lang';
-import { resetAction } from '../../stateManager/phone/action';
 
 export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { phone } = useSelector((state: ListAppState) => state);
+  const { sendCode } = useSelector((state: ListAppState) => state);
+  const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    const reset = navigation.addListener('focus', () => {
-      dispatch(resetAction());
-    });
-    return reset;
-  }, [navigation]);
-
-  useEffect(() => {
-    if (phone.response) {
+    if (didMount && sendCode.response) {
       navigation.navigate(StackNavigationRoutes.INPUT_CODE);
+    } else {
+      dispatch(sendCodeReset());
+      setDidMount(true);
     }
-  }, [phone.response]);
+  }, [sendCode.response]);
 
   function handleClick(phoneNumber: string): void {
-    dispatch(sendCode(Number(phoneNumber)));
+    dispatch(sendCodeAction(Number(phoneNumber)));
   }
-  
-  if (phone.isFetching) {
+
+  if (sendCode.isFetching) {
     return (
       <Container>
         <ActivityIndicator size="large" />
@@ -62,9 +59,9 @@ export default function Entry(): ReactElement {
             onBlur={handleBlur('phoneNumber')}
             value={values.phoneNumber}
           />
-          {(touched.phoneNumber && errors.phoneNumber) || phone.error ? (
+          {(touched.phoneNumber && errors.phoneNumber) || sendCode.error ? (
             <Text fontSize={20} color="red">
-              {errors.phoneNumber || t(phone.error)}
+              {errors.phoneNumber || t(sendCode.error)}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

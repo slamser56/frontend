@@ -15,11 +15,12 @@ export function upoadAvatarFail() {
   };
 }
 
-export function getProfileSuccess(avatar: string) {
+export function getProfileSuccess(avatar: string, phoneNumber: string) {
   return {
     type: ConstantsProfile.GET_PROFILE_SUCCESS,
     payload: {
       avatar,
+      phoneNumber,
     },
   };
 }

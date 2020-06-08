@@ -1,9 +1,13 @@
-import { PhoneState } from '../phone/type';
+import { UserState } from '../user/type';
 import { SystemState } from '../system/type';
 import { ProfileState } from '../profile/type';
+import { SendCodeState } from '../sendCode/type';
+import { VerifyCodeState } from '../verifyCode/type';
 
 export interface ListAppState {
-  phone: PhoneState;
+  user: UserState;
   system: SystemState;
   profile: ProfileState;
+  sendCode: SendCodeState;
+  verifyCode: VerifyCodeState;
 }
