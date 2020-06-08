@@ -2,12 +2,16 @@ import { SystemState, SystemActionTypes, ConstantsSystem } from './type';
 
 const initialState: SystemState = {
   language: 'en',
-  connected: true,
+  connected: false,
 };
 
 function system(state = initialState, action: SystemActionTypes): SystemState {
   switch (action.type) {
     case ConstantsSystem.CONNECT_SUCCESS:
+      return {
+        ...state,
+        connected: true,
+      };
     case ConstantsSystem.SET_LANGUAGE:
       return {
         ...state,

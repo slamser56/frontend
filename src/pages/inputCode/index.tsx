@@ -21,10 +21,8 @@ export default function Entry(): ReactElement {
   const [didMount, setDidMount] = useState(false);
   
   useEffect(() => {
-    if (didMount) {
-      if (phone.response) {
+    if (didMount && phone.response) {
         navigation.navigate(StackNavigationRoutes.HOME);
-      }
     } else {
       dispatch(resetAction());
       setDidMount(true);

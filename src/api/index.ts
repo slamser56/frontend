@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
 import { API_ADDRESS } from 'react-native-dotenv';
+import axios, { AxiosResponse } from 'axios';
 
 const api = axios.create({
   baseURL: API_ADDRESS,

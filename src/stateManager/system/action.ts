@@ -3,9 +3,6 @@ import { ConstantsSystem } from './type';
 export function connectSuccess() {
   return {
     type: ConstantsSystem.CONNECT_SUCCESS,
-    payload: {
-      connected: true,
-    },
   };
 }
 

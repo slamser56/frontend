@@ -40,6 +40,7 @@ export default function phone(state = initialState, action: PhoneActionTypes): P
         ...state,
         error: '',
         response: false,
+        isFetching: false,
       };
     case ConstantsPhone.LOG_OUT:
       return initialState;

@@ -28,9 +28,7 @@ export default function Main(): ReactElement {
   const { phone, profile } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    ((): void => {
       dispatch(getProfile());
-    })();
   }, [profile.avatar]);
 
   async function handleUploadAvatar(): Promise<void> {

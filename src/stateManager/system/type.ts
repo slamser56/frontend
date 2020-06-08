@@ -4,7 +4,6 @@ export interface SystemState {
 }
 
 export enum ConstantsSystem {
-  CONNECT_REQUEST = 'CONNECT_REQUEST',
   CONNECT_SUCCESS = 'CONNECT_SUCCESS',
   CONNECT_FAIL = 'CONNECT_FAIL',
   SET_LANGUAGE = 'SET_LANGUAGE',
