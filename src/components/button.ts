@@ -15,8 +15,8 @@ const Button = styled.TouchableOpacity<ButtonInterface>`
   margin-left: ${({ ml }): number => ml || 0}px;
   margin-right: ${({ mr }): number => mr || 0}px;
   margin-bottom: ${({ mb }): number => mb || 0}px;
-  width: ${({ width }): number => width || 200}px;
-  height: ${({ height }): number => height || 50}px;
+  width: ${({ width }): number => width || 80}%;
+  height: ${({ height }): number => height || 5}%;
   background-color: ${constantColors.gray};
   border-radius: 15px;
   justify-content: center;

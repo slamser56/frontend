@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, useEffect } from 'react';
+import React, { useState, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,29 +8,24 @@ import Text from '../../components/text';
 import Button from '../../components/button';
 import { Container, ContainerScroll } from '../../components/view';
 import { InputNewPost } from '../../components/textInput';
-import { uploadPostReset } from '../../stateManager/uploadPost/action';
-import uploadPostAction from '../../stateManager/uploadPost/thunkAction';
+import { uploadPost } from '../../stateManager/posts/thunkAction';
 import { t } from '../../lang';
 
 export default function WritePost(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { uploadPost } = useSelector((state: ListAppState) => state);
+  const [errorMessage, setErrorMessage] = useState('');
   const [text, setText] = useState('');
-  const [didMount, setDidMount] = useState(false);
+  const { posts } = useSelector((state: ListAppState) => state);
 
-  useEffect(() => {
-    if (didMount && uploadPost.response) {
-      navigation.navigate(StackNavigationRoutes.HOME);
-    } else {
-      dispatch(uploadPostReset());
-      setDidMount(true);
+  async function handleClick(): Promise<void> {
+    try {
+      await dispatch(uploadPost(text));
+      navigation.navigate(StackNavigationRoutes.PROFILE);
+    } catch (error) {
+      setErrorMessage(error);
     }
-  }, [uploadPost.response]);
-
-  function handleClick(): void {
-    dispatch(uploadPostAction(text));
   }
   return (
     <Container>
@@ -39,13 +34,14 @@ export default function WritePost(): ReactElement {
           {t('writePost.inputTextForPost')}
         </Text>
         <InputNewPost multiline mt={20} onChangeText={setText} value={text} />
-        {uploadPost.isFetching ? (
+        {posts.isFetching ? (
           <ActivityIndicator size="large" />
         ) : (
-          <Button mt={20} onPress={handleClick}>
+          <Button mt={20} height={30} width={40} onPress={handleClick}>
             <Text>{t('base.write')}</Text>
           </Button>
         )}
+        {errorMessage ? <Text color="red">{errorMessage}</Text> : null}
       </ContainerScroll>
     </Container>
   );

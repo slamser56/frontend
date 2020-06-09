@@ -29,7 +29,7 @@ export default function Main(): ReactElement {
 
   useEffect(() => {
       dispatch(getProfile());
-  }, [profile.avatar]);
+  }, []);
 
   async function handleUploadAvatar(): Promise<void> {
     ImagePicker.launchImageLibrary(options, async response => {
@@ -44,7 +44,7 @@ export default function Main(): ReactElement {
   }
 
   function handleGoMain(): void {
-    navigation.navigate(StackNavigationRoutes.MAIN_STACK);
+    navigation.navigate(StackNavigationRoutes.MAIN);
   }
 
   return (
@@ -67,14 +67,14 @@ export default function Main(): ReactElement {
           </ContainerFixed>
         </ContainerRow>
         <ButtonPanel>
-          <Button width={170} height={40} onPress={handleUploadAvatar}>
+          <Button width={40} height={100} onPress={handleUploadAvatar}>
             <Text fontSize={20}>{t('profile.uploadAvatar')}</Text>
           </Button>
-          <Button width={170} height={40} onPress={handleWritePost} ml={10}>
+          <Button width={40} height={100} onPress={handleWritePost} ml={10}>
             <Text fontSize={20}>{t('profile.writePost')}</Text>
           </Button>
         </ButtonPanel>
-        <Button width={170} height={40} onPress={handleGoMain} mt={10}>
+        <Button width={40} height={20} onPress={handleGoMain} mt={10}>
           <Text fontSize={20}>{t('profile.goMain')}</Text>
         </Button>
       </Panel>

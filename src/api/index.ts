@@ -1,13 +1,14 @@
 import { API_ADDRESS } from 'react-native-dotenv';
 import axios, { AxiosResponse } from 'axios';
+import apiConstants from './constants';
 
 const api = axios.create({
   baseURL: API_ADDRESS,
   timeout: 15000,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'access-control-allow-credentials': 'true',
+    Accept: apiConstants.APP_JSON,
+    'Content-Type': apiConstants.APP_JSON,
+    'access-control-allow-credentials': true,
   },
 });
 

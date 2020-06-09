@@ -1,4 +1,3 @@
-import Toast from 'react-native-root-toast';
 import api from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
@@ -11,7 +10,7 @@ export const checkConnect = (): AppThunk => async (dispatch): Promise<void | str
     dispatch(action.connectSuccess());
   } catch (error) {
     dispatch(action.connectFail());
-    Toast.show(t('action.doNotConnect'));
+    return Promise.reject(t('action.doNotConnect'));
   }
 };
 

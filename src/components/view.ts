@@ -7,7 +7,7 @@ interface ContainerInterface {
 
 export const Panel = styled.View`
   width: 100%;
-  height: 200px;
+  height: 50%;
   background-color: rgb(244, 244, 244);
   shadow-color: ${constantColors.black};
   shadow-opacity: 0.43;

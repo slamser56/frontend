@@ -26,3 +26,21 @@ export function getPostsSuccess(posts: Post[]) {
     },
   };
 }
+
+export function uploadPostRequest() {
+  return {
+    type: ConstantsPosts.UPLOAD_POST_REQUEST,
+  };
+}
+
+export function uploadPostSuccess() {
+  return {
+    type: ConstantsPosts.UPLOAD_POST_SUCCESS,
+  };
+}
+
+export function uploadPostFail() {
+  return {
+    type: ConstantsPosts.UPLOAD_POST_FAIL,
+  };
+}

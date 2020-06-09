@@ -3,16 +3,25 @@ import api from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
 import { t } from '../../lang';
-import { getPostsFail, getPostsRequest, getPostsSuccess } from './action';
+import * as action from './action';
 
-const getPostsAction = (text: string): AppThunk => async (dispatch): Promise<void> => {
+export const getPosts = (text: string): AppThunk => async (dispatch): Promise<void> => {
   try {
-    dispatch(getPostsRequest());
-    await api.post(apiConstants.UPLOAD_POST, { text });
-    dispatch(getPostsSuccess());
+    dispatch(action.getPostsRequest());
+    const { data } = await api.post(apiConstants.UPLOAD_POST, { text });
+    dispatch(action.getPostsSuccess(data));
   } catch (error) {
     Toast.show(t('action.somethingWrong'));
   }
 };
 
-export default uploadPostAction;
+export const uploadPost = (text: string): AppThunk => async (dispatch): Promise<void> => {
+  try {
+    dispatch(action.uploadPostRequest());
+    await api.post(apiConstants.UPLOAD_POST, { text });
+    dispatch(action.uploadPostSuccess());
+  } catch (error) {
+    dispatch(action.uploadPostFail());
+    return Promise.reject(t('action.somethingWrong'));
+  }
+};

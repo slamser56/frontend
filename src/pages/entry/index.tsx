@@ -1,10 +1,8 @@
-import React, { useEffect, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Formik } from 'formik';
 import { ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import sendCodeAction from '../../stateManager/sendCode/thunkAction';
-import { sendCodeReset } from '../../stateManager/sendCode/action';
 import Text from '../../components/text';
 import { ListAppState } from '../../stateManager/listTypes';
 import { Container } from '../../components/view';
@@ -12,29 +10,26 @@ import Button from '../../components/button';
 import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
+import { sendCode } from '../../stateManager/user/thunkAction';
 import { t } from '../../lang';
 
 export default function Entry(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { sendCode } = useSelector((state: ListAppState) => state);
-  const [didMount, setDidMount] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { user } = useSelector((state: ListAppState) => state);
 
-  useEffect(() => {
-    if (didMount && sendCode.response) {
+  async function handleClick(phoneNumber: string): Promise<void> {
+    try {
+      await dispatch(sendCode(Number(phoneNumber)));
       navigation.navigate(StackNavigationRoutes.INPUT_CODE);
-    } else {
-      dispatch(sendCodeReset());
-      setDidMount(true);
+    } catch (error) {
+      setErrorMessage(error);
     }
-  }, [sendCode.response]);
-
-  function handleClick(phoneNumber: string): void {
-    dispatch(sendCodeAction(Number(phoneNumber)));
   }
 
-  if (sendCode.isFetching) {
+  if (user.isFetching) {
     return (
       <Container>
         <ActivityIndicator size="large" />
@@ -44,7 +39,7 @@ export default function Entry(): ReactElement {
   return (
     <Formik
       initialValues={{ phoneNumber: '' }}
-      onSubmit={(values): void => handleClick(values.phoneNumber)}
+      onSubmit={(values): Promise<void> => handleClick(values.phoneNumber)}
       validationSchema={schemaPhoneNumber}
     >
       {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): Element => (
@@ -59,9 +54,9 @@ export default function Entry(): ReactElement {
             onBlur={handleBlur('phoneNumber')}
             value={values.phoneNumber}
           />
-          {(touched.phoneNumber && errors.phoneNumber) || sendCode.error ? (
+          {(touched.phoneNumber && errors.phoneNumber) || errorMessage ? (
             <Text fontSize={20} color="red">
-              {errors.phoneNumber || t(sendCode.error)}
+              {errors.phoneNumber || errorMessage}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

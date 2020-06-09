@@ -18,20 +18,44 @@ export function verifyTokenSuccess() {
   };
 }
 
-export function setPhoneNumber(phoneNumber: number) {
+export function sendCodeRequest() {
   return {
-    type: ConstantsUser.SET_PHONE_NUMBER,
+    type: ConstantsUser.SEND_CODE_REQUEST,
+  };
+}
+
+export function sendCodeSuccess(phoneNumber: number) {
+  return {
+    type: ConstantsUser.SEND_CODE_SUCCESS,
     payload: {
       phoneNumber,
     },
   };
 }
 
-export function setToken(token: string) {
+export function sendCodeFail() {
   return {
-    type: ConstantsUser.SET_TOKEN,
+    type: ConstantsUser.SEND_CODE_FAIL,
+  };
+}
+
+export function verifyCodeRequest() {
+  return {
+    type: ConstantsUser.VERIFY_CODE_REQUEST,
+  };
+}
+
+export function verifyCodeSuccess(token: string) {
+  return {
+    type: ConstantsUser.VERIFY_CODE_SUCCESS,
     payload: {
       token,
     },
+  };
+}
+
+export function verifyCodeFail() {
+  return {
+    type: ConstantsUser.VERIFY_CODE_FAIL,
   };
 }

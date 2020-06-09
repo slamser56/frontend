@@ -5,11 +5,13 @@ export interface Post {
 
 export interface PostsState {
   posts: Post[];
-  error: string;
   isFetching: boolean;
 }
 
 export enum ConstantsPosts {
+  UPLOAD_POST_REQUEST = 'UPLOAD_POST_REQUEST',
+  UPLOAD_POST_SUCCESS = 'UPLOAD_POST_SUCCESS',
+  UPLOAD_POST_FAIL = 'UPLOAD_POST_FAIL',
   GET_POSTS_REQUEST = 'GET_POSTS_REQUEST',
   GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS',
   GET_POSTS_FAIL = 'GET_POSTS_FAIL',
@@ -20,3 +22,4 @@ export type PostsActionTypes = {
   type: ConstantsPosts;
   payload: PostsState;
 };
+

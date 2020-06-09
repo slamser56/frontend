@@ -8,6 +8,7 @@ enum apiConstants {
   GET_PROFILE = '/profile/getProfile',
   UPLOAD_POST = '/post/uploadPost',
   GET_POSTS = '/post/uploadPosts',
+  APP_JSON = 'application/json'
 }
 
 export default apiConstants;

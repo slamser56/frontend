@@ -7,9 +7,7 @@ import { ListAppState } from '../listTypes';
 import user from '../user/reducer';
 import system from '../system/reducer';
 import profile from '../profile/reducer';
-import sendCode from '../sendCode/reducer';
-import verifyCode from '../verifyCode/reducer';
-import uploadPost from '../uploadPost/reducer';
+import posts from '../posts/reducer';
 
 const persistConfig = {
   key: 'user',
@@ -21,9 +19,7 @@ const rootReducer = combineReducers<ListAppState>({
   user,
   system,
   profile,
-  sendCode,
-  verifyCode,
-  uploadPost,
+  posts,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

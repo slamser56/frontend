@@ -1,4 +1,5 @@
 import React, { useEffect, ReactElement } from 'react';
+import Toast from 'react-native-root-toast';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import Text from '../../components/text';
@@ -16,14 +17,18 @@ export default function Main(): ReactElement {
   const { user } = useSelector((state: ListAppState) => state);
 
   useEffect(() => {
-    ((): void => {
-      dispatch(checkConnect());
-      if (user.token) dispatch(checkToken(user.token));
+    (async (): Promise<void> => {
+      try {
+        await dispatch(checkConnect());
+        if (user.token) await dispatch(checkToken(user.token));
+      } catch (error) {
+        Toast.show(error);
+      }
     })();
-  }, [user.token]);
+  }, []);
 
   function handleClick(): void {
-    navigation.navigate(StackNavigationRoutes.ENTRY);
+    navigation.navigate(StackNavigationRoutes.REGISTRATION_STACK);
   }
   function handleClickProfile(): void {
     navigation.navigate(StackNavigationRoutes.PROFILE_STACK);

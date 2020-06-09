@@ -5,8 +5,6 @@ import ru from './ru.json';
 i18n.translations.en = en;
 i18n.translations.ru = ru;
 
-i18n.defaultLocale = 'en';
-
 export const changeLanguage = (language: string):void => {
     i18n.locale = language;
 };
