@@ -1,4 +1,5 @@
-import api from '../../api';
+import i18n from 'i18n-js';
+import api, { acceptLanguage } from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
 import { changeLanguage, t } from '../../lang';
@@ -8,6 +9,7 @@ export const checkConnect = (): AppThunk => async (dispatch): Promise<void | str
   try {
     await api.post(apiConstants.ROOT);
     dispatch(action.connectSuccess());
+    acceptLanguage(i18n.currentLocale());
   } catch (error) {
     dispatch(action.connectFail());
     return Promise.reject(t('action.doNotConnect'));

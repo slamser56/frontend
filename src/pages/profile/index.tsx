@@ -48,10 +48,10 @@ export default function Main(): ReactElement {
   }
 
   return (
-    <ContainerFixed>
+    <ContainerFixed height={50}>
       <Panel>
         <ContainerRow>
-          <ContainerFixed>
+          <ContainerFixed width={75}>
             <Text ml={10} textAlign="left" fontSize={20}>
               {t('base.profile')}
             </Text>
@@ -62,7 +62,7 @@ export default function Main(): ReactElement {
               {profile.phoneNumber}
             </Text>
           </ContainerFixed>
-          <ContainerFixed>
+          <ContainerFixed width={25} height={90}>
             <Avatar mt={10} mr={10} source={get(profile, 'avatar') ? { uri: profile.avatar } : image} />
           </ContainerFixed>
         </ContainerRow>

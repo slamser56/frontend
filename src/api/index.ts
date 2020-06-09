@@ -30,4 +30,8 @@ export const autorizedApi = (token: string): void => {
   api.defaults.headers.Authorization = token ? `Bearer ${token}` : null;
 };
 
+export const acceptLanguage = (language: string): void => {
+  api.defaults.headers['Accept-Language'] = language;
+};
+
 export default api;

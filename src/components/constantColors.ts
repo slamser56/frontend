@@ -3,6 +3,7 @@ enum color {
   gray = 'rgba(0, 0, 0, 0.3)',
   black = 'black',
   transparent = 'transparent',
+  light = 'rgb(244, 244, 244)',
 }
 
 export default color;

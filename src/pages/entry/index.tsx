@@ -42,7 +42,7 @@ export default function Entry(): ReactElement {
       onSubmit={(values): Promise<void> => handleClick(values.phoneNumber)}
       validationSchema={schemaPhoneNumber}
     >
-      {({ handleChange, handleBlur, touched, handleSubmit, values, errors }): Element => (
+      {({ handleChange, touched, handleSubmit, values, errors }): Element => (
         <Container>
           <Text fontSize={40} mb={20}>
             {t('entry.entryPhoneNumber')}
@@ -51,7 +51,6 @@ export default function Entry(): ReactElement {
             mb={20}
             placeholder={t('entry.entryPhoneNumber')}
             onChangeText={handleChange('phoneNumber')}
-            onBlur={handleBlur('phoneNumber')}
             value={values.phoneNumber}
           />
           {(touched.phoneNumber && errors.phoneNumber) || errorMessage ? (

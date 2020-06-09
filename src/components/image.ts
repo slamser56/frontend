@@ -6,11 +6,13 @@ interface ImageInterface {
   mt?: number;
   ml?: number;
   mr?: number;
+  width?: number;
+  height?: number;
 }
 
 const Avatar = styled.Image<ImageInterface>`
-  width: 100px;
-  height: 100px;
+  width: ${({ width }): number => width || 100}%;
+  height: ${({ height }): number => height || 100}%;
   border-radius: 50px;
   background-color: ${constantColors.black};
   margin-top: ${({ mt }): number => mt || 0}px;
