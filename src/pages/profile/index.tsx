@@ -7,9 +7,9 @@ import Text from '../../components/text';
 import Button from '../../components/button';
 import Avatar from '../../components/image';
 import { Panel, ButtonPanel, ContainerFixed, ContainerRow } from '../../components/view';
-import { ListAppState } from '../../stateManager/listTypes';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { selectProfile } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 const image = require('../../image/avatar.png');
@@ -21,14 +21,13 @@ const options = {
     path: 'images',
   },
 };
-
 export default function Main(): ReactElement {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { profile } = useSelector((state: ListAppState) => state);
+  const profile = useSelector(selectProfile);
 
   useEffect(() => {
-      dispatch(getProfile());
+    dispatch(getProfile());
   }, []);
 
   async function handleUploadAvatar(): Promise<void> {

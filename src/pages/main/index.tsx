@@ -5,16 +5,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import Text from '../../components/text';
 import { Container } from '../../components/view';
 import Button from '../../components/button';
-import { ListAppState } from '../../stateManager/listTypes';
 import { logOut, checkToken } from '../../stateManager/user/thunkAction';
 import { checkConnect } from '../../stateManager/system/thunkAction';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 export default function Main(): ReactElement {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { user } = useSelector((state: ListAppState) => state);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     (async (): Promise<void> => {

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import { Input } from '../../components/textInput';
 import Text from '../../components/text';
@@ -11,6 +10,7 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import schemaCode from './validationSchema';
 import { verifyCode } from '../../stateManager/user/thunkAction';
+import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 export default function Entry(): ReactElement {
@@ -18,7 +18,7 @@ export default function Entry(): ReactElement {
   const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState('');
-  const { user } = useSelector((state: ListAppState) => state);
+  const user = useSelector(selectUser);
 
   async function handleClick(code: string): Promise<void> {
     try {

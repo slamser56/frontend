@@ -2,13 +2,13 @@ import React, { useState, ReactElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ListAppState } from '../../stateManager/listTypes';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import Text from '../../components/text';
 import Button from '../../components/button';
 import { Container, ContainerScroll } from '../../components/view';
 import { InputNewPost } from '../../components/textInput';
 import { uploadPost } from '../../stateManager/posts/thunkAction';
+import { selectPosts } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 export default function WritePost(): ReactElement {
@@ -17,7 +17,7 @@ export default function WritePost(): ReactElement {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [text, setText] = useState('');
-  const { posts } = useSelector((state: ListAppState) => state);
+  const posts = useSelector(selectPosts);
 
   async function handleClick(): Promise<void> {
     try {

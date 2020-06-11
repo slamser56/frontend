@@ -17,6 +17,7 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
+    'no-shadow':'off',
     'consistent-return': 'off',
     'global-require': 'off',
     'react-hooks/exhaustive-deps': 'off',

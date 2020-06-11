@@ -4,13 +4,13 @@ import { ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Text from '../../components/text';
-import { ListAppState } from '../../stateManager/listTypes';
 import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { Input } from '../../components/textInput';
 import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 import { sendCode } from '../../stateManager/user/thunkAction';
+import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 export default function Entry(): ReactElement {
@@ -18,7 +18,7 @@ export default function Entry(): ReactElement {
   const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState('');
-  const { user } = useSelector((state: ListAppState) => state);
+  const user = useSelector(selectUser);
 
   async function handleClick(phoneNumber: string): Promise<void> {
     try {
