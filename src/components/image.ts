@@ -8,13 +8,14 @@ interface ImageInterface {
   mr?: number;
   width?: number;
   height?: number;
+  borderRadius?: number;
 }
 
 const Avatar = styled.Image<ImageInterface>`
-  width: ${({ width }): number => width || 100}%;
-  height: ${({ height }): number => height || 100}%;
-  border-radius: 50px;
-  background-color: ${constantColors.black};
+  width: ${({ width }): number => width || 100}px;
+  height: ${({ height }): number => height || 100}px;
+  border-radius: ${({ borderRadius }): number => borderRadius || 50}px;
+  background-color: ${constantColors.transparent};
   margin-top: ${({ mt }): number => mt || 0}px;
   margin-left: ${({ ml }): number => ml || 0}px;
   margin-right: ${({ mr }): number => mr || 0}px;

@@ -4,10 +4,9 @@ enum apiConstants {
   SEND_CODE = '/phone/sendCode',
   VERIFY_TOKEN = '/phone/verifyToken',
   UPLOAD_AVATAR = '/profile/uploadAvatar',
-  DOWNLOAD_AVATAR = '/profile/downloadAvatar',
   GET_PROFILE = '/profile/getProfile',
   UPLOAD_POST = '/post/uploadPost',
-  GET_POSTS = '/post/uploadPosts',
+  GET_POSTS = '/post/getPosts',
   APP_JSON = 'application/json'
 }
 

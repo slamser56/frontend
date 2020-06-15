@@ -7,7 +7,7 @@ import Text from '../../components/text';
 import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { Input } from '../../components/textInput';
-import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { RegistrationRoutes } from '../../navigation/StackNavigationRoutes';
 import schemaPhoneNumber from './validationSchema';
 import { sendCode } from '../../stateManager/user/thunkAction';
 import { selectUser } from '../../stateManager/selectors';
@@ -23,7 +23,7 @@ export default function Entry(): ReactElement {
   async function handleClick(phoneNumber: string): Promise<void> {
     try {
       await dispatch(sendCode(Number(phoneNumber)));
-      navigation.navigate(StackNavigationRoutes.INPUT_CODE);
+      navigation.navigate(RegistrationRoutes.INPUT_CODE);
     } catch (error) {
       setErrorMessage(error);
     }

@@ -6,9 +6,9 @@ import { get } from 'lodash';
 import Text from '../../components/text';
 import Button from '../../components/button';
 import Avatar from '../../components/image';
-import { Panel, ButtonPanel, ContainerFixed, ContainerRow } from '../../components/view';
+import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
-import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { MainRoutes, ProfileRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectProfile } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -39,18 +39,18 @@ export default function Main(): ReactElement {
   }
 
   function handleWritePost(): void {
-    navigation.navigate(StackNavigationRoutes.WRITE_POST);
+    navigation.navigate(ProfileRoutes.WRITE_POST);
   }
 
   function handleGoMain(): void {
-    navigation.navigate(StackNavigationRoutes.MAIN);
+    navigation.navigate(MainRoutes.MAIN);
   }
 
   return (
-    <ContainerFixed height={50}>
+    <Container>
       <Panel>
-        <ContainerRow>
-          <ContainerFixed width={75}>
+        <ContainerRow flex={3}>
+          <ContainerFixed flex={3}>
             <Text ml={10} textAlign="left" fontSize={20}>
               {t('base.profile')}
             </Text>
@@ -61,22 +61,26 @@ export default function Main(): ReactElement {
               {profile.phoneNumber}
             </Text>
           </ContainerFixed>
-          <ContainerFixed width={25} height={90}>
-            <Avatar mt={10} mr={10} source={get(profile, 'avatar') ? { uri: profile.avatar } : image} />
+          <ContainerFixed>
+            <Avatar mr={10} source={get(profile, 'avatar') ? { uri: profile.avatar } : image} />
           </ContainerFixed>
         </ContainerRow>
-        <ButtonPanel>
+        <ContainerRow flex={1}>
           <Button width={40} height={100} onPress={handleUploadAvatar}>
             <Text fontSize={20}>{t('profile.uploadAvatar')}</Text>
           </Button>
-          <Button width={40} height={100} onPress={handleWritePost} ml={10}>
+          <Button width={40} height={100} ml={10} onPress={handleWritePost}>
             <Text fontSize={20}>{t('profile.writePost')}</Text>
           </Button>
-        </ButtonPanel>
-        <Button width={40} height={20} onPress={handleGoMain} mt={10}>
-          <Text fontSize={20}>{t('profile.goMain')}</Text>
-        </Button>
+        </ContainerRow>
+        <ContainerRow>
+          <Button width={40} height={100} mt={10} onPress={handleGoMain}>
+            <Text fontSize={20}>{t('profile.goMain')}</Text>
+          </Button>
+        </ContainerRow>
+        <ContainerRow />
       </Panel>
-    </ContainerFixed>
+      <ContainerScroll flex={3} />
+    </Container>
   );
 }

@@ -7,7 +7,7 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { logOut, checkToken } from '../../stateManager/user/thunkAction';
 import { checkConnect } from '../../stateManager/system/thunkAction';
-import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { MainRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -28,10 +28,10 @@ export default function Main(): ReactElement {
   }, []);
 
   function handleClick(): void {
-    navigation.navigate(StackNavigationRoutes.REGISTRATION_STACK);
+    navigation.navigate(MainRoutes.REGISTRATION_STACK);
   }
   function handleClickProfile(): void {
-    navigation.navigate(StackNavigationRoutes.PROFILE_STACK);
+    navigation.navigate(MainRoutes.PROFILE_STACK);
   }
   function handleLogOut(): void {
     dispatch(logOut());

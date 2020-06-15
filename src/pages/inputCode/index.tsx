@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import StackNavigationRoutes from '../../navigation/StackNavigationRoutes';
+import { MainRoutes } from '../../navigation/StackNavigationRoutes';
 import { Input } from '../../components/textInput';
 import Text from '../../components/text';
 import { Container } from '../../components/view';
@@ -23,7 +23,7 @@ export default function Entry(): ReactElement {
   async function handleClick(code: string): Promise<void> {
     try {
       await dispatch(verifyCode(code, user.phoneNumber));
-      navigation.navigate(StackNavigationRoutes.MAIN);
+      navigation.navigate(MainRoutes.MAIN);
     } catch (error) {
       setErrorMessage(error);
     }
