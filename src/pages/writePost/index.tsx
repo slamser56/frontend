@@ -8,7 +8,7 @@ import Button from '../../components/button';
 import { ContainerScroll } from '../../components/view';
 import { InputNewPost } from '../../components/textInput';
 import { uploadPost } from '../../stateManager/posts/thunkAction';
-import { selectPosts } from '../../stateManager/selectors';
+import { selectPosts, selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 export default function WritePost(): ReactElement {
@@ -18,10 +18,11 @@ export default function WritePost(): ReactElement {
   const [errorMessage, setErrorMessage] = useState('');
   const [text, setText] = useState('');
   const posts = useSelector(selectPosts);
+  const user = useSelector(selectUser);
 
   async function handleClick(): Promise<void> {
     try {
-      await dispatch(uploadPost(text));
+      await dispatch(uploadPost(text, user.phoneNumber));
       navigation.navigate(ProfileRoutes.PROFILE);
     } catch (error) {
       setErrorMessage(error);

@@ -1,4 +1,4 @@
-import {AxiosResponse} from 'axios';
+import { AxiosResponse } from 'axios';
 import { ConstantPost, ConstantPosts } from './type';
 
 export function getPostsRequest() {
@@ -34,12 +34,14 @@ export function uploadPostRequest() {
   };
 }
 
-export function uploadPostSuccess(text: string, date: string) {
+export function uploadPostSuccess(text: string, createdAt: string, postId: string, phoneNumber: number) {
   return {
     type: ConstantPost.UPLOAD_POST_SUCCESS,
     payload: {
       text,
-      date,
+      createdAt,
+      postId,
+      phoneNumber,
     },
   };
 }

@@ -15,11 +15,11 @@ export const getPosts = (): AppThunk => async (dispatch): Promise<void> => {
   }
 };
 
-export const uploadPost = (text: string): AppThunk => async (dispatch): Promise<void> => {
+export const uploadPost = (text: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.uploadPostRequest());
-    const { date } = await api.post(apiConstants.POST, { text });
-    dispatch(action.uploadPostSuccess(text, date));
+    const { createdAt, _id } = await api.post(apiConstants.POST, { text });
+    dispatch(action.uploadPostSuccess(text, createdAt, _id, phoneNumber));
   } catch (error) {
     dispatch(action.uploadPostFail());
     return Promise.reject(error.response.data);

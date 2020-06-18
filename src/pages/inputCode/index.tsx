@@ -58,6 +58,7 @@ export default function Entry(): ReactElement {
           </Text>
           <Input
             mb={20}
+            secureTextEntry
             placeholder={t('inputCode.entryPassword')}
             onChangeText={handleChange('password')}
             value={values.password}

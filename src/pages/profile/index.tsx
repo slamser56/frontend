@@ -2,7 +2,7 @@ import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
-import moment from 'moment';
+import { format } from 'date-fns';
 import Text from '../../components/text';
 import Button from '../../components/button';
 import Avatar from '../../components/image';
@@ -84,30 +84,28 @@ export default function Main(): ReactElement {
         <ContainerRow />
       </Panel>
       <ContainerScroll flex={3}>
-        {post.posts?.map((value, index) => {
-          return (
-            <Panel mt={30} key={index}>
-              <ContainerRow>
-                <Text textAlign="left" fontSize={25}>
-                  {`${t('post.dateOfPost')}:`}
-                </Text>
-              </ContainerRow>
-              <ContainerRow>
-                <Text textAlign="left" fontSize={20}>
-                  {moment(value.date).format('MMM DD YYYY HH:mm')}
-                </Text>
-              </ContainerRow>
-              <ContainerRow>
-                <Text textAlign="left" fontSize={25}>{`${t('post.textOfPost')}:`}</Text>
-              </ContainerRow>
-              <ContainerRow>
-                <Text textAlign="left" fontSize={20}>
-                  {value.text}
-                </Text>
-              </ContainerRow>
-            </Panel>
-          );
-        })}
+        {post.posts?.map(value => (
+          <Panel mt={30} key={value.postId}>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={25}>
+                {`${t('post.dateOfPost')}:`}
+              </Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={20}>
+                {format(new Date(value.createdAt), 'MM/dd/yyyy HH:mm')}
+              </Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={25}>{`${t('post.textOfPost')}:`}</Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={20}>
+                {value.text}
+              </Text>
+            </ContainerRow>
+          </Panel>
+        ))}
       </ContainerScroll>
     </Container>
   );

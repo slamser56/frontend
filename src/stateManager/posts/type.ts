@@ -1,6 +1,8 @@
 export interface Post {
   text: string;
-  date: string;
+  createdAt: string;
+  postId: string;
+  phoneNumber: number;
 }
 
 export interface PostsState {
@@ -11,9 +13,9 @@ export interface PostsState {
 export enum ConstantPosts {
   UPLOAD_POST_REQUEST = 'UPLOAD_POST_REQUEST',
   UPLOAD_POST_FAIL = 'UPLOAD_POST_FAIL',
-  DELETE_POST_REQUEST= 'DELETE_POST_REQUEST',
-  DELETE_POST_FAIL= 'DELETE_POST_FAIL',
-  DELETE_POST_SUCCESS= 'DELETE_POST_SUCCESS',
+  DELETE_POST_REQUEST = 'DELETE_POST_REQUEST',
+  DELETE_POST_FAIL = 'DELETE_POST_FAIL',
+  DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS',
   GET_POSTS_REQUEST = 'GET_POSTS_REQUEST',
   GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS',
   GET_POSTS_FAIL = 'GET_POSTS_FAIL',
