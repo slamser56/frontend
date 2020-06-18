@@ -1,26 +1,27 @@
-import { ConstantsPosts, Post } from './type';
+import {AxiosResponse} from 'axios';
+import { ConstantPost, ConstantPosts } from './type';
 
 export function getPostsRequest() {
   return {
-    type: ConstantsPosts.GET_POSTS_REQUEST,
+    type: ConstantPosts.GET_POSTS_REQUEST,
   };
 }
 
 export function getPostsFail() {
   return {
-    type: ConstantsPosts.GET_POSTS_FAIL,
+    type: ConstantPosts.GET_POSTS_FAIL,
   };
 }
 
 export function postsReset() {
   return {
-    type: ConstantsPosts.POSTS_RESET,
+    type: ConstantPosts.POSTS_RESET,
   };
 }
 
-export function getPostsSuccess(posts: Post[]) {
+export function getPostsSuccess(posts: AxiosResponse) {
   return {
-    type: ConstantsPosts.GET_POSTS_SUCCESS,
+    type: ConstantPosts.GET_POSTS_SUCCESS,
     payload: {
       posts,
     },
@@ -29,18 +30,22 @@ export function getPostsSuccess(posts: Post[]) {
 
 export function uploadPostRequest() {
   return {
-    type: ConstantsPosts.UPLOAD_POST_REQUEST,
+    type: ConstantPosts.UPLOAD_POST_REQUEST,
   };
 }
 
-export function uploadPostSuccess() {
+export function uploadPostSuccess(text: string, date: string) {
   return {
-    type: ConstantsPosts.UPLOAD_POST_SUCCESS,
+    type: ConstantPost.UPLOAD_POST_SUCCESS,
+    payload: {
+      text,
+      date,
+    },
   };
 }
 
 export function uploadPostFail() {
   return {
-    type: ConstantsPosts.UPLOAD_POST_FAIL,
+    type: ConstantPosts.UPLOAD_POST_FAIL,
   };
 }

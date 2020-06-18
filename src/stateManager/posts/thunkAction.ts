@@ -2,26 +2,26 @@ import Toast from 'react-native-root-toast';
 import api from '../../api';
 import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
-import { t } from '../../lang';
 import * as action from './action';
 
-export const getPosts = (text: string): AppThunk => async (dispatch): Promise<void> => {
+export const getPosts = (): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.getPostsRequest());
-    const { data } = await api.post(apiConstants.UPLOAD_POST, { text });
-    dispatch(action.getPostsSuccess(data));
+    const posts = await api.get(apiConstants.POST);
+    dispatch(action.getPostsSuccess(posts));
   } catch (error) {
-    Toast.show(t('action.somethingWrong'));
+    dispatch(action.getPostsFail());
+    Toast.show(error.response.data);
   }
 };
 
 export const uploadPost = (text: string): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.uploadPostRequest());
-    await api.post(apiConstants.UPLOAD_POST, { text });
-    dispatch(action.uploadPostSuccess());
+    const { date } = await api.post(apiConstants.POST, { text });
+    dispatch(action.uploadPostSuccess(text, date));
   } catch (error) {
     dispatch(action.uploadPostFail());
-    return Promise.reject(t('action.somethingWrong'));
+    return Promise.reject(error.response.data);
   }
 };

@@ -6,6 +6,8 @@ interface ContainerInterface {
   width?: number;
   height?: number;
   flex?: number;
+  mb?: number;
+  mt?: number;
 }
 
 export const Panel = styled.View<ContainerInterface>`
@@ -17,6 +19,8 @@ export const Panel = styled.View<ContainerInterface>`
   shadow-opacity: 0.43;
   shadow-radius: 9.51px;
   elevation: 15;
+  margin-top: ${({ mt }): number => mt || 0}px;
+  margin-bottom: ${({ mb }): number => mb || 0}px;
 `;
 
 export const Container = styled.View<ContainerInterface>`

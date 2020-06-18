@@ -7,7 +7,7 @@ import * as action from './action';
 
 export const checkToken = (token: string): AppThunk => async (dispatch): Promise<void> => {
   try {
-    await api.post(apiConstants.VERIFY_TOKEN, { token });
+    await api.get(apiConstants.VERIFY_TOKEN, { params: { token } });
     autorizedApi(token);
     dispatch(action.verifyTokenSuccess());
   } catch (error) {
@@ -28,24 +28,27 @@ export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Pro
     dispatch(action.sendCodeSuccess(phoneNumber));
   } catch (error) {
     dispatch(action.sendCodeFail());
-    return Promise.reject(t('action.somethingWrong'));
+    return Promise.reject(error.response.data);
   }
 };
 
-export const verifyCode = (code: string, phoneNumber: number): AppThunk => async (dispatch): Promise<void> => {
+export const verifyCode = (code: string, phoneNumber: number, password: string): AppThunk => async (
+  dispatch,
+): Promise<void> => {
   try {
     dispatch(action.verifyCodeRequest());
     const { token } = await api.post(apiConstants.VERIFY_CODE, {
       phoneNumber,
       code,
+      password,
     });
     autorizedApi(token);
     dispatch(action.verifyCodeSuccess(token));
   } catch (error) {
     dispatch(action.verifyCodeFail());
     if (error.response.status === 404) {
-      return Promise.reject(t('action.inputCorrectCode'));
+      return Promise.reject(error.response.data);
     }
-    return Promise.reject(t('action.somethingWrong'));
+    return Promise.reject(error.response.data);
   }
 };
