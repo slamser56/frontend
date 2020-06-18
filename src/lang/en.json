@@ -2,7 +2,8 @@
   "base": {
     "ok": "OK",
     "profile": "Profile",
-    "write": "Write"
+    "write": "Write",
+    "delete": "delete"
   },
   "writePost": {
     "inputTextForPost": "Input text for post"

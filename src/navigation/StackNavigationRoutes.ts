@@ -2,12 +2,16 @@ export enum MainRoutes {
   MAIN = 'MAIN',
   PROFILE_STACK = 'PROFILE_STACK',
   REGISTRATION_STACK = 'REGISTRATION_STACK',
+  SIGN_IN_STACK = 'SIGN_IN_STACK',
 }
 
 export enum RegistrationRoutes {
   ENTRY = 'ENTRY',
   INPUT_CODE = 'INPUT_CODE',
-  SING_IN = 'SING_IN',
+}
+
+export enum SingInRoutes {
+  SIGN_IN = 'SIGN_IN',
 }
 
 export enum ProfileRoutes {

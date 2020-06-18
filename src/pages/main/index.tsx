@@ -7,7 +7,7 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { logOut, checkToken } from '../../stateManager/user/thunkAction';
 import { checkConnect } from '../../stateManager/system/thunkAction';
-import { MainRoutes, RegistrationRoutes } from '../../navigation/StackNavigationRoutes';
+import { MainRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -27,13 +27,13 @@ export default function Main(): ReactElement {
     })();
   }, []);
 
-  function handleClickSignUp(): void {
+  function handleSignUp(): void {
     navigation.navigate(MainRoutes.REGISTRATION_STACK);
   }
-  function handleClickSignIn(): void {
-    navigation.navigate(MainRoutes.REGISTRATION_STACK, {screen: RegistrationRoutes.SING_IN});
+  function handleSignIn(): void {
+    navigation.navigate(MainRoutes.SIGN_IN_STACK);
   }
-  function handleClickProfile(): void {
+  function handleProfile(): void {
     navigation.navigate(MainRoutes.PROFILE_STACK);
   }
   function handleLogOut(): void {
@@ -47,16 +47,16 @@ export default function Main(): ReactElement {
           <Button mt={10} onPress={handleLogOut}>
             <Text fontSize={20}>{t('main.logOut')}</Text>
           </Button>
-          <Button mt={10} onPress={handleClickProfile}>
+          <Button mt={10} onPress={handleProfile}>
             <Text fontSize={20}>{t('base.profile')}</Text>
           </Button>
         </>
       ) : (
         <>
-          <Button onPress={handleClickSignUp}>
+          <Button onPress={handleSignUp}>
             <Text fontSize={20}>{t('main.signUp')}</Text>
           </Button>
-          <Button mt={10} onPress={handleClickSignIn}>
+          <Button mt={10} onPress={handleSignIn}>
             <Text fontSize={20}>{t('main.signIn')}</Text>
           </Button>
         </>

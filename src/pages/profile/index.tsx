@@ -112,7 +112,7 @@ export default function Main(): ReactElement {
               <ContainerFixed flex={3} />
               <ContainerFixed>
                 <Button height={100} width={100} onPress={(): Promise<void> => handleDeletePost(value.postId)}>
-                  <Text fontSize={20}>delete</Text>
+                  <Text fontSize={20}>{t('base.delete')}</Text>
                 </Button>
               </ContainerFixed>
             </ContainerRow>
