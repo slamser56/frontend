@@ -1,12 +1,11 @@
 enum apiConstants {
   ROOT = '/',
-  VERIFY_CODE = '/phone/verifyCode',
-  SEND_CODE = '/phone/sendCode',
-  VERIFY_TOKEN = '/phone/verifyToken',
-  UPLOAD_AVATAR = '/profile/uploadAvatar',
-  GET_PROFILE = '/profile/getProfile',
-  UPLOAD_POST = '/post/uploadPost',
-  GET_POSTS = '/post/getPosts',
+  VERIFY_CODE = '/registration/verifyCode',
+  SEND_CODE = '/registration/sendCode',
+  VERIFY_TOKEN = '/registration/verifyToken',
+  PROFILE = '/profile',
+  AVATAR = '/profile/avatar',
+  POST = '/post',
   APP_JSON = 'application/json'
 }
 

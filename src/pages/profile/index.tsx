@@ -2,14 +2,15 @@ import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
-import { get } from 'lodash';
+import { format } from 'date-fns';
 import Text from '../../components/text';
 import Button from '../../components/button';
 import Avatar from '../../components/image';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
+import { getPosts } from '../../stateManager/posts/thunkAction';
 import { MainRoutes, ProfileRoutes } from '../../navigation/StackNavigationRoutes';
-import { selectProfile } from '../../stateManager/selectors';
+import { selectProfile, selectPosts } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
 const image = require('../../image/avatar.png');
@@ -25,9 +26,11 @@ export default function Main(): ReactElement {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const profile = useSelector(selectProfile);
+  const post = useSelector(selectPosts);
 
   useEffect(() => {
     dispatch(getProfile());
+    dispatch(getPosts());
   }, []);
 
   async function handleUploadAvatar(): Promise<void> {
@@ -62,7 +65,7 @@ export default function Main(): ReactElement {
             </Text>
           </ContainerFixed>
           <ContainerFixed>
-            <Avatar mr={10} source={get(profile, 'avatar') ? { uri: profile.avatar } : image} />
+            <Avatar mr={10} source={profile?.avatar ? { uri: profile.avatar } : image} />
           </ContainerFixed>
         </ContainerRow>
         <ContainerRow flex={1}>
@@ -80,7 +83,30 @@ export default function Main(): ReactElement {
         </ContainerRow>
         <ContainerRow />
       </Panel>
-      <ContainerScroll flex={3} />
+      <ContainerScroll flex={3}>
+        {post.posts?.map(value => (
+          <Panel mt={30} key={value.postId}>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={25}>
+                {`${t('post.dateOfPost')}:`}
+              </Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={20}>
+                {format(new Date(value.createdAt), 'MM/dd/yyyy HH:mm')}
+              </Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={25}>{`${t('post.textOfPost')}:`}</Text>
+            </ContainerRow>
+            <ContainerRow>
+              <Text textAlign="left" fontSize={20}>
+                {value.text}
+              </Text>
+            </ContainerRow>
+          </Panel>
+        ))}
+      </ContainerScroll>
     </Container>
   );
 }

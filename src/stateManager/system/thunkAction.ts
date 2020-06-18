@@ -7,7 +7,7 @@ import * as action from './action';
 
 export const checkConnect = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    await api.post(apiConstants.ROOT);
+    await api.get(apiConstants.ROOT);
     dispatch(action.connectSuccess());
     acceptLanguage(i18n.currentLocale());
   } catch (error) {

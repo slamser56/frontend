@@ -1,17 +1,18 @@
 {
-  "base":{
+  "base": {
     "ok": "OK",
     "profile": "Profile",
     "write": "Write"
   },
-  "writePost":{
+  "writePost": {
     "inputTextForPost": "Input text for post"
   },
-  "entry":{
+  "entry": {
     "entryPhoneNumber": "Entry phone number"
   },
   "inputCode": {
-    "entryCode": "Entry code"
+    "entryCode": "Entry code",
+    "entryPassword": "Entry password"
   },
   "profile": {
     "profilePhoneNumber": "Profile phone number",
@@ -24,15 +25,19 @@
     "goToRegistration": "Go to Registration",
     "yourPhoneNumber": "Your phone number"
   },
-  "action":{
-    "somethingWrong":"Something wrong",
-    "inputCorrectCode":"Input correct code",
-    "verifyTokenFail":"Verify token fail",
-    "doNotConnect":"Do not connect"
+  "action": {
+    "somethingWrong": "Something wrong",
+    "inputCorrectCode": "Input correct code",
+    "verifyTokenFail": "Verify token fail",
+    "doNotConnect": "Do not connect"
   },
-  "validation":{
-    "inputValidPhoneNumber":"Input valid phone number",
-    "phoneNumberIsNotValid":"Phone number is not valid",
-    "inputCorrectCode":"Input correct code"
+  "validation": {
+    "inputValidPhoneNumber": "Input valid phone number",
+    "phoneNumberIsNotValid": "Phone number is not valid",
+    "inputCorrectCode": "Input correct code"
+  },
+  "post": {
+    "dateOfPost": "Date of post",
+    "textOfPost": "Text of post"
   }
 }

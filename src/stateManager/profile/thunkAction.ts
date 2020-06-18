@@ -2,27 +2,26 @@ import Toast from 'react-native-root-toast';
 import { AppThunk } from '../thunkType';
 import api from '../../api';
 import apiConstants from '../../api/constants';
-import { t } from '../../lang';
 import { upoadAvatarSuccess, upoadAvatarFail, getProfileFail, getProfileSuccess } from './action';
 
 export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar } = await api.post(apiConstants.UPLOAD_AVATAR, {
+    const { avatar } = await api.put(apiConstants.AVATAR, {
       image,
     });
     dispatch(upoadAvatarSuccess(avatar));
   } catch (error) {
     dispatch(upoadAvatarFail());
-    Toast.show(t('action.somethingWrong'));
+    Toast.show(error.response.data);
   }
 };
 
 export const getProfile = (): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar, phoneNumber } = await api.post(apiConstants.GET_PROFILE);
+    const { avatar, phoneNumber } = await api.get(apiConstants.PROFILE);
     dispatch(getProfileSuccess(avatar, phoneNumber));
   } catch (error) {
     dispatch(getProfileFail());
-    Toast.show(t('action.somethingWrong'));
+    Toast.show(error.response.data);
   }
 };

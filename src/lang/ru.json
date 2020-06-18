@@ -11,7 +11,8 @@
     "entryPhoneNumber": "Введите номер телефона"
   },
   "inputCode": {
-    "entryCode": "Введите код"
+    "entryCode": "Введите код",
+    "entryPassword": "Введите пароль"
   },
   "profile": {
     "profilePhoneNumber": "Номер телефона профиля",
@@ -34,5 +35,9 @@
     "inputValidPhoneNumber":"Введите валидный номер телефона",
     "phoneNumberIsNotValid":"Номер телефона не валидный",
     "inputCorrectCode":"Введите корректный код"
+  },
+  "post": {
+    "dateOfPost": "Дата поста",
+    "textOfPost": "Текст поста"
   }
 }

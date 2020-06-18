@@ -20,9 +20,9 @@ export default function Entry(): ReactElement {
   const [errorMessage, setErrorMessage] = useState('');
   const user = useSelector(selectUser);
 
-  async function handleClick(code: string): Promise<void> {
+  async function handleClick(code: string, password: string): Promise<void> {
     try {
-      await dispatch(verifyCode(code, user.phoneNumber));
+      await dispatch(verifyCode(code, user.phoneNumber, password));
       navigation.navigate(MainRoutes.MAIN);
     } catch (error) {
       setErrorMessage(error);
@@ -38,8 +38,8 @@ export default function Entry(): ReactElement {
   }
   return (
     <Formik
-      initialValues={{ code: '' }}
-      onSubmit={(values): Promise<void> => handleClick(values.code)}
+      initialValues={{ code: '', password: '' }}
+      onSubmit={(values): Promise<void> => handleClick(values.code, values.password)}
       validationSchema={schemaCode}
     >
       {({ handleChange, touched, handleSubmit, values, errors }): ReactElement => (
@@ -52,6 +52,16 @@ export default function Entry(): ReactElement {
             placeholder={t('inputCode.entryCode')}
             onChangeText={handleChange('code')}
             value={values.code}
+          />
+          <Text fontSize={40} mb={20}>
+            {t('inputCode.entryPassword')}
+          </Text>
+          <Input
+            mb={20}
+            secureTextEntry
+            placeholder={t('inputCode.entryPassword')}
+            onChangeText={handleChange('password')}
+            value={values.password}
           />
           {(touched.code && errors.code) || errorMessage ? (
             <Text fontSize={20} color="red">
