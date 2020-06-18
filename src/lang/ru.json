@@ -1,18 +1,18 @@
 {
-  "base":{
+  "base": {
     "ok": "OK",
     "profile": "Профиль",
     "write": "Написать"
   },
-  "writePost":{
+  "writePost": {
     "inputTextForPost": "Введите текст для поста"
   },
-  "entry":{
-    "entryPhoneNumber": "Введите номер телефона"
+  "entry": {
+    "entryPhoneNumber": "Введите номер телефона",
+    "entryPassword": "Введите пароль"
   },
   "inputCode": {
-    "entryCode": "Введите код",
-    "entryPassword": "Введите пароль"
+    "entryCode": "Введите код"
   },
   "profile": {
     "profilePhoneNumber": "Номер телефона профиля",
@@ -22,19 +22,22 @@
   },
   "main": {
     "logOut": "Выйти",
-    "goToRegistration": "Регистрация",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
     "yourPhoneNumber": "Ваш номер телефона"
   },
-  "action":{
-    "somethingWrong":"Что-то пошло не так",
-    "inputCorrectCode":"Введите корректный код",
-    "verifyTokenFail":"Токен не прошел проверку",
-    "doNotConnect":"Нет соединения"
+  "action": {
+    "somethingWrong": "Что-то пошло не так",
+    "inputCorrectCode": "Введите корректный код",
+    "verifyTokenFail": "Токен не прошел проверку",
+    "doNotConnect": "Нет соединения"
   },
-  "validation":{
-    "inputValidPhoneNumber":"Введите валидный номер телефона",
-    "phoneNumberIsNotValid":"Номер телефона не валидный",
-    "inputCorrectCode":"Введите корректный код"
+  "validation": {
+    "inputValidPhoneNumber": "Введите валидный номер телефона",
+    "phoneNumberIsNotValid": "Номер телефона не валидный",
+    "inputCorrectCode": "Введите корректный код",
+    "passwordWillBeHaveMinimum": "Пароль должен иметь минимум 3 символа",
+    "passwordWillBeHaveMaximum": "Пароль должен иметь максимум 16 символов"
   },
   "post": {
     "dateOfPost": "Дата поста",

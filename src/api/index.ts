@@ -18,6 +18,7 @@ api.interceptors.response.use(
     switch (status) {
       case 200:
       case 201:
+      case 204:
         return Promise.resolve(data);
       default:
         return Promise.reject();

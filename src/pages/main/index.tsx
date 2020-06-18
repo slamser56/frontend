@@ -7,7 +7,7 @@ import { Container } from '../../components/view';
 import Button from '../../components/button';
 import { logOut, checkToken } from '../../stateManager/user/thunkAction';
 import { checkConnect } from '../../stateManager/system/thunkAction';
-import { MainRoutes } from '../../navigation/StackNavigationRoutes';
+import { MainRoutes, RegistrationRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -27,8 +27,11 @@ export default function Main(): ReactElement {
     })();
   }, []);
 
-  function handleClick(): void {
+  function handleClickSignUp(): void {
     navigation.navigate(MainRoutes.REGISTRATION_STACK);
+  }
+  function handleClickSignIn(): void {
+    navigation.navigate(MainRoutes.REGISTRATION_STACK, {screen: RegistrationRoutes.SING_IN});
   }
   function handleClickProfile(): void {
     navigation.navigate(MainRoutes.PROFILE_STACK);
@@ -49,9 +52,14 @@ export default function Main(): ReactElement {
           </Button>
         </>
       ) : (
-        <Button onPress={handleClick}>
-          <Text fontSize={20}>{t('main.goToRegistration')}</Text>
-        </Button>
+        <>
+          <Button onPress={handleClickSignUp}>
+            <Text fontSize={20}>{t('main.signUp')}</Text>
+          </Button>
+          <Button mt={10} onPress={handleClickSignIn}>
+            <Text fontSize={20}>{t('main.signIn')}</Text>
+          </Button>
+        </>
       )}
     </Container>
   );

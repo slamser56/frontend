@@ -8,11 +8,11 @@
     "inputTextForPost": "Input text for post"
   },
   "entry": {
-    "entryPhoneNumber": "Entry phone number"
+    "entryPhoneNumber": "Entry phone number",
+    "entryPassword": "Entry password"
   },
   "inputCode": {
-    "entryCode": "Entry code",
-    "entryPassword": "Entry password"
+    "entryCode": "Entry code"
   },
   "profile": {
     "profilePhoneNumber": "Profile phone number",
@@ -22,7 +22,8 @@
   },
   "main": {
     "logOut": "Log out",
-    "goToRegistration": "Go to Registration",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
     "yourPhoneNumber": "Your phone number"
   },
   "action": {
@@ -34,7 +35,9 @@
   "validation": {
     "inputValidPhoneNumber": "Input valid phone number",
     "phoneNumberIsNotValid": "Phone number is not valid",
-    "inputCorrectCode": "Input correct code"
+    "inputCorrectCode": "Input correct code",
+    "passwordWillBeHaveMinimum": "Password will be have minimum 3 character",
+    "passwordWillBeHaveMaximum": "Password will be have maximum 16 character"
   },
   "post": {
     "dateOfPost": "Date of post",

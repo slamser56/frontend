@@ -39,6 +39,28 @@ export function sendCodeFail() {
   };
 }
 
+export function logInRequest() {
+  return {
+    type: ConstantsUser.LOG_IN_REQUEST,
+  };
+}
+
+export function logInSuccess(token: string, phoneNumber: number) {
+  return {
+    type: ConstantsUser.LOG_IN_SUCCESS,
+    payload: {
+      phoneNumber,
+      token,
+    },
+  };
+}
+
+export function logInFail() {
+  return {
+    type: ConstantsUser.LOG_IN_FAIL,
+  };
+}
+
 export function verifyCodeRequest() {
   return {
     type: ConstantsUser.VERIFY_CODE_REQUEST,

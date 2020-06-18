@@ -51,3 +51,24 @@ export function uploadPostFail() {
     type: ConstantPosts.UPLOAD_POST_FAIL,
   };
 }
+
+export function deletePostRequest() {
+  return {
+    type: ConstantPosts.DELETE_POST_REQUEST,
+  };
+}
+
+export function deletePostFail() {
+  return {
+    type: ConstantPosts.DELETE_POST_FAIL,
+  };
+}
+
+export function deletePostSuccess(postId: string) {
+  return {
+    type: ConstantPost.DELETE_POST_SUCCESS,
+    payload: {
+      postId,
+    },
+  };
+}

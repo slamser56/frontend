@@ -8,7 +8,7 @@ import Button from '../../components/button';
 import Avatar from '../../components/image';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
-import { getPosts } from '../../stateManager/posts/thunkAction';
+import { getPosts, deletePost } from '../../stateManager/posts/thunkAction';
 import { MainRoutes, ProfileRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectProfile, selectPosts } from '../../stateManager/selectors';
 import { t } from '../../lang';
@@ -47,6 +47,10 @@ export default function Main(): ReactElement {
 
   function handleGoMain(): void {
     navigation.navigate(MainRoutes.MAIN);
+  }
+
+  async function handleDeletePost(postId: string): Promise<void> {
+    await dispatch(deletePost(postId));
   }
 
   return (
@@ -103,6 +107,14 @@ export default function Main(): ReactElement {
               <Text textAlign="left" fontSize={20}>
                 {value.text}
               </Text>
+            </ContainerRow>
+            <ContainerRow>
+              <ContainerFixed flex={3} />
+              <ContainerFixed>
+                <Button height={100} width={100} onPress={(): Promise<void> => handleDeletePost(value.postId)}>
+                  <Text fontSize={20}>delete</Text>
+                </Button>
+              </ContainerFixed>
             </ContainerRow>
           </Panel>
         ))}

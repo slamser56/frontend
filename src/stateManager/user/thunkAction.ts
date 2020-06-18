@@ -21,6 +21,18 @@ export const logOut = (): AppThunk => (dispatch): void => {
   dispatch(action.logOutAction());
 };
 
+export const logIn = (phoneNumber: number, password: string): AppThunk => async (dispatch): Promise<void> => {
+  try {
+    dispatch(action.logInRequest());
+    const { token } = await api.get(apiConstants.LOG_IN, { params: { phoneNumber, password } });
+    autorizedApi(token);
+    dispatch(action.logInSuccess(token, phoneNumber));
+  } catch (error) {
+    dispatch(action.logInFail());
+    return Promise.reject(error.response?.data);
+  }
+};
+
 export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.sendCodeRequest());
@@ -28,7 +40,7 @@ export const sendCode = (phoneNumber: number): AppThunk => async (dispatch): Pro
     dispatch(action.sendCodeSuccess(phoneNumber));
   } catch (error) {
     dispatch(action.sendCodeFail());
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response?.data);
   }
 };
 
@@ -47,8 +59,8 @@ export const verifyCode = (code: string, phoneNumber: number, password: string):
   } catch (error) {
     dispatch(action.verifyCodeFail());
     if (error.response.status === 404) {
-      return Promise.reject(error.response.data);
+      return Promise.reject(error.response?.data);
     }
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response?.data);
   }
 };

@@ -7,6 +7,7 @@ export enum MainRoutes {
 export enum RegistrationRoutes {
   ENTRY = 'ENTRY',
   INPUT_CODE = 'INPUT_CODE',
+  SING_IN = 'SING_IN',
 }
 
 export enum ProfileRoutes {

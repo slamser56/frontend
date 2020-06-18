@@ -1,15 +1,15 @@
 import React, { ReactElement, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { ActivityIndicator } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import { MainRoutes } from '../../navigation/StackNavigationRoutes';
-import { Input } from '../../components/textInput';
+import { ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import schemaSignIn from './validationSchema';
 import Text from '../../components/text';
 import { Container } from '../../components/view';
 import Button from '../../components/button';
-import schemaCode from './validationSchema';
-import { verifyCode } from '../../stateManager/user/thunkAction';
+import { Input } from '../../components/textInput';
+import { MainRoutes } from '../../navigation/StackNavigationRoutes';
+import { logIn } from '../../stateManager/user/thunkAction';
 import { selectUser } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -20,10 +20,10 @@ export default function Entry(): ReactElement {
   const [errorMessage, setErrorMessage] = useState('');
   const user = useSelector(selectUser);
 
-  async function handleClick(code: string, password: string): Promise<void> {
+  async function handleClick(phoneNumber: string, password: string): Promise<void> {
     try {
-      await dispatch(verifyCode(code, user.phoneNumber, password));
-      navigation.navigate(MainRoutes.MAIN);
+      await dispatch(logIn(Number(phoneNumber), password));
+      navigation.navigate(MainRoutes.PROFILE_STACK);
     } catch (error) {
       setErrorMessage(error);
     }
@@ -38,20 +38,20 @@ export default function Entry(): ReactElement {
   }
   return (
     <Formik
-      initialValues={{ code: '', password: '' }}
-      onSubmit={(values): Promise<void> => handleClick(values.code, values.password)}
-      validationSchema={schemaCode}
+      initialValues={{ phoneNumber: '', password: '' }}
+      onSubmit={(values): Promise<void> => handleClick(values.phoneNumber, values.password)}
+      validationSchema={schemaSignIn}
     >
-      {({ handleChange, touched, handleSubmit, values, errors }): ReactElement => (
+      {({ handleChange, touched, handleSubmit, values, errors }): Element => (
         <Container>
           <Text fontSize={40} mb={20}>
-            {t('inputCode.entryCode')}
+            {t('entry.entryPhoneNumber')}
           </Text>
           <Input
             mb={20}
-            placeholder={t('inputCode.entryCode')}
-            onChangeText={handleChange('code')}
-            value={values.code}
+            placeholder={t('entry.entryPhoneNumber')}
+            onChangeText={handleChange('phoneNumber')}
+            value={values.phoneNumber}
           />
           <Text fontSize={40} mb={20}>
             {t('entry.entryPassword')}
@@ -63,9 +63,9 @@ export default function Entry(): ReactElement {
             onChangeText={handleChange('password')}
             value={values.password}
           />
-          {(touched.code && errors.code) || (touched.password && errors.password) || errorMessage ? (
+          {(touched.phoneNumber && errors.phoneNumber) || errorMessage ? (
             <Text fontSize={20} color="red">
-              {errors.code || errors.password || errorMessage}
+              {errors.phoneNumber || errorMessage}
             </Text>
           ) : null}
           <Button onPress={handleSubmit}>

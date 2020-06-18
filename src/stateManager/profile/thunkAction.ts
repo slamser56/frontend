@@ -12,7 +12,7 @@ export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promi
     dispatch(upoadAvatarSuccess(avatar));
   } catch (error) {
     dispatch(upoadAvatarFail());
-    Toast.show(error.response.data);
+    Toast.show(error.response?.data);
   }
 };
 
@@ -22,6 +22,6 @@ export const getProfile = (): AppThunk => async (dispatch): Promise<void | strin
     dispatch(getProfileSuccess(avatar, phoneNumber));
   } catch (error) {
     dispatch(getProfileFail());
-    Toast.show(error.response.data);
+    Toast.show(error.response?.data);
   }
 };
