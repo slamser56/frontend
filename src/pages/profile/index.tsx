@@ -49,6 +49,10 @@ export default function Main(): ReactElement {
     navigation.navigate(MainRoutes.MAIN);
   }
 
+  function handleSubscriptions(): void {
+    navigation.navigate(ProfileRoutes.SUBSCRIPTION);
+  }
+
   async function handleDeletePost(postId: string): Promise<void> {
     await dispatch(deletePost(postId));
   }
@@ -83,6 +87,9 @@ export default function Main(): ReactElement {
         <ContainerRow>
           <Button width={40} height={100} mt={10} onPress={handleGoMain}>
             <Text fontSize={20}>{t('profile.goMain')}</Text>
+          </Button>
+          <Button width={40} height={100} ml={10} mt={10} onPress={handleSubscriptions}>
+            <Text fontSize={20}>{t('profile.subscriptions')}</Text>
           </Button>
         </ContainerRow>
         <ContainerRow />

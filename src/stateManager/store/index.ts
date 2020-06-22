@@ -8,6 +8,7 @@ import user from '../user/reducer';
 import system from '../system/reducer';
 import profile from '../profile/reducer';
 import posts from '../posts/reducer';
+import subscriptions from '../subscriptions/reducer';
 
 const persistConfig = {
   key: 'user',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers<ListAppState>({
   system,
   profile,
   posts,
+  subscriptions,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

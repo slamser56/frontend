@@ -8,6 +8,7 @@ interface ContainerInterface {
   flex?: number;
   mb?: number;
   mt?: number;
+  justifyContent?: string;
 }
 
 export const Panel = styled.View<ContainerInterface>`
@@ -39,6 +40,7 @@ export const ContainerFixed = styled.View<ContainerInterface>`
 export const ContainerRow = styled.View<ContainerInterface>`
   flex-direction: row;
   flex: ${({ flex }): number => flex || 1};
+  justify-content: ${({ justifyContent }): string => justifyContent || 'flex-start'};
 `;
 
 export const ContainerScroll = styled.ScrollView<ContainerInterface>`

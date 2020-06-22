@@ -7,6 +7,7 @@ enum apiConstants {
   PROFILE = '/profile',
   AVATAR = '/profile/avatar',
   POST = '/post',
+  SUBSCRIPTION = '/subscription',
   APP_JSON = 'application/json'
 }
 

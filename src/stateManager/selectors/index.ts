@@ -15,3 +15,8 @@ export const selectPosts = createSelector(
   (state: ListAppState) => state.posts,
   posts => posts,
 );
+
+export const selectSubscriptions = createSelector(
+  (state: ListAppState) => state.subscriptions,
+  subscriptions => subscriptions,
+);

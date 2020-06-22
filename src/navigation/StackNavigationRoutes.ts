@@ -17,4 +17,6 @@ export enum SingInRoutes {
 export enum ProfileRoutes {
   PROFILE = 'PROFILE',
   WRITE_POST = 'WRITE_POST',
+  SUBSCRIPTION = 'SUBSCRIPTION',
+  FIND_USER = 'FIND_USER',
 }

@@ -3,7 +3,15 @@
     "ok": "OK",
     "profile": "Profile",
     "write": "Write",
-    "delete": "delete"
+    "delete": "delete",
+    "phoneNumber": "Phone number"
+  },
+  "subscription": {
+    "dateSubscription": "Date subscription",
+    "subscriptions": "Subscriptions",
+    "unsubscribe": "Unsubscribe",
+    "findUser": "Find user",
+    "subscribe":"Subscribe"
   },
   "writePost": {
     "inputTextForPost": "Input text for post"
@@ -19,7 +27,8 @@
     "profilePhoneNumber": "Profile phone number",
     "uploadAvatar": "Upload avatar",
     "writePost": "Write post",
-    "goMain": "Go main"
+    "goMain": "Go main",
+    "subscriptions": "Subscriptions"
   },
   "main": {
     "logOut": "Log out",
