@@ -1,6 +1,6 @@
-import { API_ADDRESS_EN } from 'react-native-dotenv';
 import axios, { AxiosResponse } from 'axios';
 import apiConstants from './constants';
+import { API_ADDRESS_EN } from 'react-native-dotenv';
 
 const api = axios.create({
   baseURL: API_ADDRESS_EN,

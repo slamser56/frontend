@@ -3,6 +3,7 @@ import { SystemState } from '../system/type';
 import { ProfileState } from '../profile/type';
 import { PostsState } from '../posts/type';
 import { SubscriptionsState } from '../subscriptions/type';
+import { FindUsersState } from '../findUsers/type';
 
 export interface ListAppState {
   user: UserState;
@@ -10,4 +11,5 @@ export interface ListAppState {
   profile: ProfileState;
   posts: PostsState;
   subscriptions: SubscriptionsState;
+  findUsers: FindUsersState;
 }

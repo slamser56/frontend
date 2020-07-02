@@ -5,7 +5,7 @@ const initialState: PostsState = {
   isFetching: false,
 };
 
-export default function post(state = initialState, action: PostActionTypes): PostsState {
+export default function posts(state = initialState, action: PostActionTypes): PostsState {
   switch (action.type) {
     case ConstantPosts.UPLOAD_POST_REQUEST:
     case ConstantPosts.GET_POSTS_REQUEST:

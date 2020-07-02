@@ -57,7 +57,7 @@ export default function Main(): ReactElement {
             </ContainerRow>
             <ContainerRow>
               <Text textAlign="left" fontSize={20}>
-                {format(new Date(value.createdAt), 'MM/dd/yyyy HH:mm')}
+                {format(new Date(value?.createdAt), 'MM/dd/yyyy HH:mm')}
               </Text>
             </ContainerRow>
             <ContainerRow>

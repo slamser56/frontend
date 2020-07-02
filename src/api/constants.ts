@@ -8,7 +8,8 @@ enum apiConstants {
   AVATAR = '/profile/avatar',
   POST = '/post',
   SUBSCRIPTION = '/subscription',
-  APP_JSON = 'application/json'
+  USERS = '/users',
+  APP_JSON = 'application/json',
 }
 
 export default apiConstants;

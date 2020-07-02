@@ -5,7 +5,7 @@ const initialState: SubscriptionsState = {
   isFetching: false,
 };
 
-export default function post(state = initialState, action: SubscriptionActionTypes): SubscriptionsState {
+export default function subscriptions(state = initialState, action: SubscriptionActionTypes): SubscriptionsState {
   switch (action.type) {
     case ConstantSubscriptions.GET_SUBSCRIPTIONS_REQUEST:
     case ConstantSubscriptions.SUBSCRIBE_REQUEST:

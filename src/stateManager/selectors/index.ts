@@ -20,3 +20,8 @@ export const selectSubscriptions = createSelector(
   (state: ListAppState) => state.subscriptions,
   subscriptions => subscriptions,
 );
+
+export const selectFindUsers= createSelector(
+  (state: ListAppState) => state.findUsers,
+  users => users,
+);

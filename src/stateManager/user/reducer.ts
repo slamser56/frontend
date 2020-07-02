@@ -6,7 +6,7 @@ const initialState: UserState = {
   isFetching: false,
 };
 
-export default function phone(state = initialState, action: UserActionType): UserState {
+export default function user(state = initialState, action: UserActionType): UserState {
   switch (action.type) {
     case ConstantsUser.VERIFY_CODE_REQUEST:
     case ConstantsUser.LOG_IN_REQUEST:
