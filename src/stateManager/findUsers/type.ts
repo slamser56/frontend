@@ -1,6 +1,6 @@
 export interface User {
   createdAt: string;
-  userId: string;
+  _id: string;
   phoneNumber: number;
 }
 

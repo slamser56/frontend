@@ -15,21 +15,23 @@ export const getSubscriptions = (): AppThunk => async (dispatch): Promise<void> 
   }
 };
 
-export const subscribe = (user: string): AppThunk => async (dispatch): Promise<void> => {
+export const subscribe = (user: string, createdAt: string, phoneNumber: number): AppThunk => async (
+  dispatch,
+): Promise<void> => {
   try {
     dispatch(action.subscribeRequest());
-    const { createdAt, _id, phoneNumber } = await api.post(apiConstants.SUBSCRIPTION, { user });
-    dispatch(action.subscribeSuccess(_id, createdAt, phoneNumber));
+    await api.post(apiConstants.SUBSCRIPTION, { anotherUserId: user });
+    dispatch(action.subscribeSuccess(user, createdAt, phoneNumber));
   } catch (error) {
     dispatch(action.subscribeFail());
-    return Promise.reject(error.response?.data);
+    Toast.show(error.response?.data);
   }
 };
 
 export const unsubscribe = (user: string): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.unsubscribeRequest());
-    await api.delete(apiConstants.SUBSCRIPTION, { data: { user } });
+    await api.delete(apiConstants.SUBSCRIPTION, { data: { anotherUserId: user } });
     dispatch(action.unsubscribeSuccess(user));
   } catch (error) {
     dispatch(action.unsubscribeFail());

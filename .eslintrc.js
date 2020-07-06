@@ -1,9 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint'],
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -17,27 +15,26 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
-    'no-shadow':'off',
+    'no-underscore-dangle': 'off',
+    'no-shadow': 'off',
     'consistent-return': 'off',
     'global-require': 'off',
     'react-hooks/exhaustive-deps': 'off',
-    'react/jsx-filename-extension': [1, { 'extensions': ['.tsx', '.ts'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts'] }],
     '@typescript-eslint/no-var-requires': 'off',
     'prefer-promise-reject-errors': 'off',
-    'camelcase': 'off',
+    camelcase: 'off',
     '@typescript-eslint/camelcase': 'off',
-    'max-len': ["error", { "code": 120 }],
+    'max-len': ['error', { code: 120 }],
     'import/extensions': [
-       'error',
-       'ignorePackages',
-       {
-         js: 'never',
-         jsx: 'never',
-         ts: 'never',
-         tsx: 'never'
-       }
-    ]
- }
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+  },
 };
-
-
