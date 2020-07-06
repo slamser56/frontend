@@ -1,6 +1,6 @@
-import React, { useEffect, ReactElement, useState } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { format } from 'date-fns';
+import { Formik } from 'formik';
 import Text from '../../components/text';
 import { Input } from '../../components/textInput';
 import Button from '../../components/button';
@@ -12,10 +12,8 @@ import { findUsersReset } from '../../stateManager/findUsers/action';
 import { t } from '../../lang';
 
 export default function Main(): ReactElement {
-  const [phoneNumber, setPhoneNumber] = useState('');
-
-  const findUser = useSelector(selectFindUsers);
   const dispatch = useDispatch();
+  const findUser = useSelector(selectFindUsers);
 
   useEffect(() => {
     dispatch(findUsersReset());
@@ -32,14 +30,23 @@ export default function Main(): ReactElement {
   return (
     <Container>
       <ContainerRow justifyContent="space-between">
-        <ContainerFixed flex={2}>
-          <Input height={100} value={phoneNumber} onChangeText={(value: string): void => setPhoneNumber(value)} />
-        </ContainerFixed>
-        <ContainerFixed>
-          <Button height={100} onPress={(): Promise<void> => handleFindUser(phoneNumber)}>
-            <Text fontSize={20}>{t('base.ok')}</Text>
-          </Button>
-        </ContainerFixed>
+        <Formik
+          initialValues={{ phoneNumber: '' }}
+          onSubmit={(values): Promise<void> => handleFindUser(values.phoneNumber)}
+        >
+          {({ handleChange, handleSubmit, values }): ReactElement => (
+            <>
+              <ContainerFixed flex={2}>
+                <Input height={100} value={values.phoneNumber} onChangeText={handleChange('phoneNumber')} />
+              </ContainerFixed>
+              <ContainerFixed>
+                <Button height={100} onPress={handleSubmit}>
+                  <Text fontSize={20}>{t('base.ok')}</Text>
+                </Button>
+              </ContainerFixed>
+            </>
+          )}
+        </Formik>
       </ContainerRow>
       <ContainerScroll flex={15}>
         {findUser.users?.map(value => (

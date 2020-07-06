@@ -11,7 +11,8 @@
     "subscriptions": "Subscriptions",
     "unsubscribe": "Unsubscribe",
     "findUser": "Find user",
-    "subscribe":"Subscribe"
+    "subscribe":"Subscribe",
+    "openProfile":"Open profile"
   },
   "writePost": {
     "inputTextForPost": "Input text for post"

@@ -3,7 +3,16 @@
     "ok": "OK",
     "profile": "Профиль",
     "write": "Написать",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "phoneNumber": "Номер телефона"
+  },
+  "subscription": {
+    "dateSubscription": "Дата подписки",
+    "subscriptions": "Подписки",
+    "unsubscribe": "Отписаться",
+    "findUser": "Найти пользователя",
+    "subscribe":"Подписаться",
+    "openProfile":"Открыть профиль"
   },
   "writePost": {
     "inputTextForPost": "Введите текст для поста"
@@ -19,7 +28,8 @@
     "profilePhoneNumber": "Номер телефона профиля",
     "uploadAvatar": "Загрузить аватар",
     "writePost": "Написать пост",
-    "goMain": "Перейти на главную"
+    "goMain": "Перейти на главную",
+    "subscriptions": "Подписки"
   },
   "main": {
     "logOut": "Выйти",

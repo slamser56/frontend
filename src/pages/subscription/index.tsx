@@ -27,6 +27,10 @@ export default function Main(): ReactElement {
     navigation.navigate(ProfileRoutes.FIND_USER);
   }
 
+  function handleOpenProfile(userId: string): void {
+    navigation.navigate(ProfileRoutes.PROFILE, { userId });
+  }
+
   return (
     <Container>
       <ContainerScroll>
@@ -62,6 +66,11 @@ export default function Main(): ReactElement {
             </ContainerRow>
             <ContainerRow>
               <ContainerFixed flex={3} />
+              <ContainerFixed flex={2}>
+                <Button height={100} width={100} onPress={(): void => handleOpenProfile(value.userId)}>
+                  <Text fontSize={20}>{t('subscription.openProfile')}</Text>
+                </Button>
+              </ContainerFixed>
               <ContainerFixed flex={2}>
                 <Button height={100} width={100} onPress={(): Promise<void> => handleUnsubscribe(value.userId)}>
                   <Text fontSize={20}>{t('subscription.unsubscribe')}</Text>

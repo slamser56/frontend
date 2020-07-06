@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import Text from '../../components/text';
 import Button from '../../components/button';
 import Avatar from '../../components/image';
+import { Props } from '../propsType';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
 import { getPosts, deletePost } from '../../stateManager/posts/thunkAction';
@@ -22,11 +23,13 @@ const options = {
     path: 'images',
   },
 };
-export default function Main(): ReactElement {
+export default function Main({ route: { params } }: Props): ReactElement {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const profile = useSelector(selectProfile);
   const post = useSelector(selectPosts);
+
+  useEffect(() => {}, [params]);
 
   useEffect(() => {
     dispatch(getProfile());
