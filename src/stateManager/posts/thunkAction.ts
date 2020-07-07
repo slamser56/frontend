@@ -4,10 +4,10 @@ import { AppThunk } from '../thunkType';
 import apiConstants from '../../api/constants';
 import * as action from './action';
 
-export const getPosts = (): AppThunk => async (dispatch): Promise<void> => {
+export const getPosts = (user: string): AppThunk => async (dispatch): Promise<void> => {
   try {
     dispatch(action.getPostsRequest());
-    const posts = await api.get(apiConstants.POST);
+    const posts = await api.get(apiConstants.POST, { params: { user } });
     dispatch(action.getPostsSuccess(posts));
   } catch (error) {
     dispatch(action.getPostsFail());

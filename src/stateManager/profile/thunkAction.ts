@@ -16,9 +16,9 @@ export const uploadAvatar = (image: string): AppThunk => async (dispatch): Promi
   }
 };
 
-export const getProfile = (): AppThunk => async (dispatch): Promise<void | string> => {
+export const getProfile = (user: string): AppThunk => async (dispatch): Promise<void | string> => {
   try {
-    const { avatar, phoneNumber } = await api.get(apiConstants.PROFILE);
+    const { avatar, phoneNumber } = await api.get(apiConstants.PROFILE, { params: { user } });
     dispatch(getProfileSuccess(avatar, phoneNumber));
   } catch (error) {
     dispatch(getProfileFail());

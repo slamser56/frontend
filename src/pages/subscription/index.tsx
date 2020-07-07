@@ -1,4 +1,5 @@
 import React, { useEffect, ReactElement } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
@@ -7,6 +8,7 @@ import Button from '../../components/button';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { ProfileRoutes } from '../../navigation/StackNavigationRoutes';
 import { getSubscriptions, unsubscribe } from '../../stateManager/subscriptions/thunkAction';
+import { subscriptionsReset } from '../../stateManager/subscriptions/action';
 import { selectSubscriptions } from '../../stateManager/selectors';
 import { t } from '../../lang';
 
@@ -16,6 +18,7 @@ export default function Main(): ReactElement {
   const subscription = useSelector(selectSubscriptions);
 
   useEffect(() => {
+    dispatch(subscriptionsReset());
     dispatch(getSubscriptions());
   }, []);
 
@@ -44,6 +47,7 @@ export default function Main(): ReactElement {
             </Button>
           </ContainerFixed>
         </ContainerRow>
+        {subscription.isFetching ? <ActivityIndicator size="large" /> : null}
         {subscription.subscriptions?.map(value => (
           <Panel mt={20} key={value.userId}>
             <ContainerRow>

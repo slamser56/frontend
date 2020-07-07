@@ -1,4 +1,5 @@
 import React, { useEffect, ReactElement } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-picker';
@@ -10,6 +11,7 @@ import { Props } from '../propsType';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import { uploadAvatar, getProfile } from '../../stateManager/profile/thunkAction';
 import { getPosts, deletePost } from '../../stateManager/posts/thunkAction';
+import { postsReset } from '../../stateManager/posts/action';
 import { MainRoutes, ProfileRoutes } from '../../navigation/StackNavigationRoutes';
 import { selectProfile, selectPosts } from '../../stateManager/selectors';
 import { t } from '../../lang';
@@ -29,12 +31,11 @@ export default function Main({ route: { params } }: Props): ReactElement {
   const profile = useSelector(selectProfile);
   const post = useSelector(selectPosts);
 
-  useEffect(() => {}, [params]);
-
   useEffect(() => {
-    dispatch(getProfile());
-    dispatch(getPosts());
-  }, []);
+    dispatch(postsReset());
+    dispatch(getProfile(params?.userId));
+    dispatch(getPosts(params?.userId));
+  }, [params]);
 
   async function handleUploadAvatar(): Promise<void> {
     ImagePicker.launchImageLibrary(options, async response => {
@@ -80,24 +81,31 @@ export default function Main({ route: { params } }: Props): ReactElement {
           </ContainerFixed>
         </ContainerRow>
         <ContainerRow flex={1}>
-          <Button width={40} height={100} onPress={handleUploadAvatar}>
-            <Text fontSize={20}>{t('profile.uploadAvatar')}</Text>
-          </Button>
-          <Button width={40} height={100} ml={10} onPress={handleWritePost}>
-            <Text fontSize={20}>{t('profile.writePost')}</Text>
-          </Button>
+          {params?.userId ? null : (
+            <>
+              <Button width={40} height={100} onPress={handleUploadAvatar}>
+                <Text fontSize={20}>{t('profile.uploadAvatar')}</Text>
+              </Button>
+              <Button width={40} height={100} ml={10} onPress={handleWritePost}>
+                <Text fontSize={20}>{t('profile.writePost')}</Text>
+              </Button>
+            </>
+          )}
         </ContainerRow>
         <ContainerRow>
           <Button width={40} height={100} mt={10} onPress={handleGoMain}>
             <Text fontSize={20}>{t('profile.goMain')}</Text>
           </Button>
-          <Button width={40} height={100} ml={10} mt={10} onPress={handleSubscriptions}>
-            <Text fontSize={20}>{t('profile.subscriptions')}</Text>
-          </Button>
+          {params?.userId ? null : (
+            <Button width={40} height={100} ml={10} mt={10} onPress={handleSubscriptions}>
+              <Text fontSize={20}>{t('profile.subscriptions')}</Text>
+            </Button>
+          )}
         </ContainerRow>
         <ContainerRow />
       </Panel>
       <ContainerScroll flex={3}>
+        {post.isFetching ? <ActivityIndicator size="large" /> : null}
         {post.posts?.map(value => (
           <Panel mt={30} key={value.postId}>
             <ContainerRow>

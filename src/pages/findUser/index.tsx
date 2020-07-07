@@ -1,4 +1,5 @@
 import React, { useEffect, ReactElement } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import Text from '../../components/text';
@@ -6,14 +7,15 @@ import { Input } from '../../components/textInput';
 import Button from '../../components/button';
 import { Panel, ContainerFixed, ContainerRow, Container, ContainerScroll } from '../../components/view';
 import findUsers from '../../stateManager/findUsers/thunkAction';
-import { subscribe } from '../../stateManager/subscriptions/thunkAction';
-import { selectFindUsers } from '../../stateManager/selectors';
+import { subscribe, unsubscribe } from '../../stateManager/subscriptions/thunkAction';
+import { selectFindUsers, selectSubscriptions } from '../../stateManager/selectors';
 import { findUsersReset } from '../../stateManager/findUsers/action';
 import { t } from '../../lang';
 
 export default function Main(): ReactElement {
   const dispatch = useDispatch();
   const findUser = useSelector(selectFindUsers);
+  const subscription = useSelector(selectSubscriptions);
 
   useEffect(() => {
     dispatch(findUsersReset());
@@ -25,6 +27,10 @@ export default function Main(): ReactElement {
 
   async function handleSubscribe(userId: string, createdAt: string, phoneNumber: number): Promise<void> {
     await dispatch(subscribe(userId, createdAt, phoneNumber));
+  }
+
+  async function handleUnsubscribe(userId: string): Promise<void> {
+    await dispatch(unsubscribe(userId));
   }
 
   return (
@@ -49,6 +55,7 @@ export default function Main(): ReactElement {
         </Formik>
       </ContainerRow>
       <ContainerScroll flex={15}>
+        {findUser.isFetching ? <ActivityIndicator size="large" /> : null}
         {findUser.users?.map(value => (
           <Panel mt={20} key={value._id}>
             <ContainerRow>
@@ -64,13 +71,21 @@ export default function Main(): ReactElement {
             <ContainerRow>
               <ContainerFixed flex={3} />
               <ContainerFixed flex={2}>
-                <Button
-                  height={100}
-                  width={100}
-                  onPress={(): Promise<void> => handleSubscribe(value._id, value.createdAt, value.phoneNumber)}
-                >
-                  <Text fontSize={20}>{t('subscription.subscribe')}</Text>
-                </Button>
+                {subscription.subscriptions.find(element => {
+                  return element.userId === value._id;
+                }) ? (
+                  <Button height={100} width={100} onPress={(): Promise<void> => handleUnsubscribe(value._id)}>
+                    <Text fontSize={20}>{t('subscription.unsubscribe')}</Text>
+                  </Button>
+                ) : (
+                  <Button
+                    height={100}
+                    width={100}
+                    onPress={(): Promise<void> => handleSubscribe(value._id, value.createdAt, value.phoneNumber)}
+                  >
+                    <Text fontSize={20}>{t('subscription.subscribe')}</Text>
+                  </Button>
+                )}
               </ContainerFixed>
             </ContainerRow>
           </Panel>
